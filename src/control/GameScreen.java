@@ -3,6 +3,7 @@ package control;
 import elements.Skull;
 import elements.Lolo;
 import elements.Element;
+import elements.Wall;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -28,6 +29,9 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     private final Lolo lolo;
     private final ArrayList<Element> elemArray;
     private final GameController controller = new GameController();
+    private final Wall[] walls = new Wall[300];
+    private final Stage stage = new Stage();
+ 
 
     public GameScreen() {
         Drawing.setGameScreen(this);
@@ -48,7 +52,31 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         Skull skull = new Skull("caveira.png");
         skull.setPosition(9, 1);
-        this.addElement(skull);  
+        this.addElement(skull);
+        
+        int k=0;
+        stage.generateWallCord(1);
+        
+        
+        for(int i=0;i<Consts.NUM_CELLS;i++){
+            for(int j=0;j<Consts.NUM_CELLS;j++){
+                    
+                if(stage.wallCords[i][j]==true){
+                    
+                    walls[k]=new Wall("caveira.png");
+                    walls[k].setPosition(i,j);
+                    this.addElement(walls[k]);
+                    k++;
+                    System.out.println(k);
+                    
+                }
+                
+            }
+     
+        }
+    
+        
+
     }
     
     public final void addElement(Element elem) {
@@ -70,6 +98,9 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
            Trocar essa parte por uma estrutura mais bem organizada
            Utilizando a classe Stage
         */
+        
+        
+        
         for (int i = 0; i < Consts.NUM_CELLS; i++) {
             for (int j = 0; j < Consts.NUM_CELLS; j++) {
                 try {
@@ -83,6 +114,11 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             }
         }
         
+        
+       
+        
+    
+        
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
         this.setTitle("-> Cell: " + lolo.getStringPosition());
@@ -92,6 +128,11 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         if (!getBufferStrategy().contentsLost()) {
             getBufferStrategy().show();
         }
+        
+       
+        
+        
+        
     }
     
     public void go() {
@@ -158,5 +199,9 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+    
+    public void wallPaint(){
+       
     }
 }
