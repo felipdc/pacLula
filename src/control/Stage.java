@@ -51,7 +51,7 @@ public class Stage{
                     wallCount++;
                 }
                 for(i=0;i<Consts.NUM_CELLS;i++){
-                    wallCords[18][i]=true;
+                    wallCords[19][i]=true;
                     wallCount++;
                 }
        // }

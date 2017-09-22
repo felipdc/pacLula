@@ -46,11 +46,11 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         elemArray = new ArrayList<Element>();
 
         /*Cria e adiciona elementos*/
-        lolo = new Lolo("lolo.png");
+        lolo = new Lolo("lula.png");
         lolo.setPosition(0, 0);
         this.addElement(lolo);
         
-        Skull skull = new Skull("caveira.png");
+        Skull skull = new Skull("ghost_1.png");
         skull.setPosition(9, 1);
         this.addElement(skull);
         
@@ -63,7 +63,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                     
                 if(stage.wallCords[i][j]==true){
                     
-                    walls[k]=new Wall("caveira.png");
+                    walls[k]=new Wall("wall1.png");
                     walls[k].setPosition(i,j);
                     this.addElement(walls[k]);
                     k++;
@@ -104,7 +104,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         for (int i = 0; i < Consts.NUM_CELLS; i++) {
             for (int j = 0; j < Consts.NUM_CELLS; j++) {
                 try {
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "bricks.png");
+                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "ground1.png");
                     g2.drawImage(newImage,
                             j * Consts.CELL_SIZE, i * Consts.CELL_SIZE, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
                     

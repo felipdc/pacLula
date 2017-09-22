@@ -25,7 +25,7 @@ public class Skull extends Element{
         this.contIntervals++;
         if(this.contIntervals == Consts.TIMER_FOGO){
             this.contIntervals = 0;
-            Fire f = new Fire("fire.png");
+            Fire f = new Fire("money1.png");
             f.setPosition(pos.getX(),pos.getY()+1);
             Drawing.getGameScreen().addElement(f);
         }
