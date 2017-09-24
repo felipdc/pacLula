@@ -57,6 +57,8 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         int k=0;
         stage.generateWallCord(1);
         
+        //adding walls in stage 
+  
         
         for(int i=0;i<Consts.NUM_CELLS;i++){
             for(int j=0;j<Consts.NUM_CELLS;j++){
