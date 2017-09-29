@@ -8,6 +8,10 @@ public class Stage{
     private int wallCount=0;
     public boolean[][] wallCords = new boolean[Consts.NUM_CELLS][Consts.NUM_CELLS];
     
+    public Stage(int level){
+        generateWallCord(level);
+    }
+    
     public String showStageLevel(){
         
         String stageLv = String.valueOf(stageLevel);
@@ -141,7 +145,7 @@ public class Stage{
     }
     
     
-    public int wallNumber(){
+    public int getWallNumber(){
         return wallCount;
     }
     

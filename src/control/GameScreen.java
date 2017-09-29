@@ -29,8 +29,8 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     private final Lolo lolo;
     private final ArrayList<Element> elemArray;
     private final GameController controller = new GameController();
-    private final Wall[] walls = new Wall[300];
-    private final Stage stage = new Stage();
+    private final Stage stage = new Stage(1);
+    private final Wall[] walls = new Wall[stage.getWallNumber()+1];
  
 
     public GameScreen() {
@@ -55,7 +55,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         this.addElement(skull);
         
         int k=0;
-        stage.generateWallCord(1);
+        //stage.generateWallCord(1);
         
         //adding walls in stage 
   
@@ -76,8 +76,6 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             }
      
         }
-    
-        
 
     }
     
