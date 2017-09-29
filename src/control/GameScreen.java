@@ -4,6 +4,7 @@ import elements.Skull;
 import elements.Lolo;
 import elements.Element;
 import elements.Wall;
+import elements.Coin;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -31,6 +32,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     private final GameController controller = new GameController();
     private final Stage stage = new Stage(1);
     private final Wall[] walls = new Wall[stage.getWallNumber()+1];
+    private final Coin[] coins = new Coin[utils.Consts.NUM_CELLS*utils.Consts.NUM_CELLS+1];
  
 
     public GameScreen() {
@@ -55,9 +57,10 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         this.addElement(skull);
         
         int k=0;
+        int z=0;
         //stage.generateWallCord(1);
         
-        //adding walls in stage 
+        //adding walls and coins to stage 
   
         
         for(int i=0;i<Consts.NUM_CELLS;i++){
@@ -71,8 +74,12 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                     k++;
                     System.out.println(k);
                     
+                }else{
+                    coins[z]=new Coin("money1.png");
+                    coins[z].setPosition(i,j);
+                    this.addElement(coins[z]);
+                    z++;
                 }
-                
             }
      
         }
