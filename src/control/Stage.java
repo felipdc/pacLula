@@ -6,7 +6,7 @@ public class Stage{
     
     private int stageLevel;
     private int wallCount=0;
-    public int[][] wallCords = new int[Consts.NUM_CELLS][Consts.NUM_CELLS];
+    protected int[][] wallCords = new int[Consts.NUM_CELLS][Consts.NUM_CELLS];
     
     public Stage(int level){
         generateWallCord(level);
@@ -38,6 +38,8 @@ public class Stage{
         return "";
         
     }
+    
+    //TODO reduce number of fors 
     
     public void generateWallCord(int stageLevel){     
         

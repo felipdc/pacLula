@@ -19,4 +19,7 @@ public class Consts {
     
     public static final int DELAY = 20;
     public static final int TIMER_FOGO = 40;
+    
+    public static final int coinPoint = 1;
+    public static final int fruitPoint = 10;
 }

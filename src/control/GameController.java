@@ -4,6 +4,7 @@ import elements.Element;
 import elements.Lolo;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import utils.Consts;
 
 /**
  * Projeto de POO 2017
@@ -33,15 +34,21 @@ public class GameController {
         }
         
         Element eTemp;
+        String eTempName;
         
         for(int i = 1; i < e.size(); i++){
             eTemp = e.get(i);
             if(lLolo.overlap(eTemp)){
                 if(eTemp.isTransposable()){
                     e.remove(eTemp);
-                    System.out.println(eTemp);
-                    System.out.println(score);
-                    score++;
+                    //check which element was removed
+                    eTempName = String.valueOf(eTemp);
+                    if(eTempName.contains("Coin")){
+                        score=score+Consts.coinPoint;
+                    }
+                    if(eTempName.contains("Fruit")){
+                        score=score+Consts.fruitPoint;
+                    }
                 }
             }
             

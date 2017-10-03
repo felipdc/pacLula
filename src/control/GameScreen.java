@@ -54,6 +54,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         Skull skull = new Skull("ghost_1.png");
         skull.setPosition(9, 1);
+        stage.wallCords[9][1]=2;
         this.addElement(skull);
         
         int k=0;
