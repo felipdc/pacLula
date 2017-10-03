@@ -58,15 +58,13 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         int k=0;
         int z=0;
-        //stage.generateWallCord(1);
         
         //adding walls and coins to stage 
-  
         
         for(int i=0;i<Consts.NUM_CELLS;i++){
             for(int j=0;j<Consts.NUM_CELLS;j++){
                     
-                if(stage.wallCords[i][j]==true){
+                if(stage.wallCords[i][j]==1){
                     
                     walls[k]=new Wall("wall1.png");
                     walls[k].setPosition(i,j);
@@ -74,7 +72,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                     k++;
                     System.out.println(k);
                     
-                }else{
+                }if(stage.wallCords[i][j]==0){
                     coins[z]=new Coin("money1.png");
                     coins[z].setPosition(i,j);
                     this.addElement(coins[z]);
@@ -120,25 +118,16 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                 }
             }
         }
-        
-        
-       
-        
-    
-        
+
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition());
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore());
         
         g.dispose();
         g2.dispose();
         if (!getBufferStrategy().contentsLost()) {
             getBufferStrategy().show();
         }
-        
-       
-        
-        
         
     }
     

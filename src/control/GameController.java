@@ -11,7 +11,11 @@ import java.util.ArrayList;
  * @author Luiz Eduardo
  * Baseado em material do Prof. Jose Fernando Junior
  */
+
 public class GameController {
+    
+    private int score=0;
+    
     public void drawAllElements(ArrayList<Element> elemArray, Graphics g){
         for(int i=0; i<elemArray.size(); i++){
             elemArray.get(i).autoDraw(g);
@@ -29,11 +33,18 @@ public class GameController {
         }
         
         Element eTemp;
+        
         for(int i = 1; i < e.size(); i++){
             eTemp = e.get(i);
-            if(lLolo.overlap(eTemp))
-                if(eTemp.isTransposable())
+            if(lLolo.overlap(eTemp)){
+                if(eTemp.isTransposable()){
                     e.remove(eTemp);
+                    System.out.println(eTemp);
+                    System.out.println(score);
+                    score++;
+                }
+            }
+            
         }
         
         lLolo.move();
@@ -47,5 +58,9 @@ public class GameController {
                     return false;
         }        
         return true;
+    }
+    
+    public int getScore(){
+        return score;
     }
 }

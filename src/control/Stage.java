@@ -6,7 +6,7 @@ public class Stage{
     
     private int stageLevel;
     private int wallCount=0;
-    public boolean[][] wallCords = new boolean[Consts.NUM_CELLS][Consts.NUM_CELLS];
+    public int[][] wallCords = new int[Consts.NUM_CELLS][Consts.NUM_CELLS];
     
     public Stage(int level){
         generateWallCord(level);
@@ -45,14 +45,14 @@ public class Stage{
         
         for(i=0;i<Consts.NUM_CELLS;i++){
             for(int j=0;j<Consts.NUM_CELLS;j++){
-                wallCords[i][j]=false;
+                wallCords[i][j]=0;
             }
         }
         //switch(stageLevel){
             //case 1:
                 for(i=0;i<Consts.NUM_CELLS;i++){
-                    wallCords[0][i]=true;
-                    wallCords[19][i]=true;
+                    wallCords[0][i]=1;
+                    wallCords[19][i]=1;
                     wallCount=wallCount+2;
                 }
     
@@ -60,8 +60,8 @@ public class Stage{
                     if(i==10){
                         continue;
                     }
-                    wallCords[i][0]=true;
-                    wallCords[i][19]=true;
+                    wallCords[i][0]=1;
+                    wallCords[i][19]=1;
                     wallCount=wallCount+2;
                 }
                 
@@ -69,20 +69,20 @@ public class Stage{
                     if(i==10){
                         continue;
                     }
-                    wallCords[i][2]=true;
-                    wallCords[i][17]=true;
+                    wallCords[i][2]=1;
+                    wallCords[i][17]=1;
                     wallCount=wallCount+2;
                 }
                 
                  for(i=4;i<16;i++){
                     if(i==9){
-                        wallCords[1][10]=true;
-                        wallCords[18][10]=true;
+                        wallCords[1][10]=1;
+                        wallCords[18][10]=1;
                         wallCount=wallCount+2;
                         continue;
                     }
-                    wallCords[2][i]=true;
-                    wallCords[17][i]=true;
+                    wallCords[2][i]=1;
+                    wallCords[17][i]=1;
                     wallCount=wallCount+2;
                 }
                  
@@ -90,8 +90,8 @@ public class Stage{
                     if(i==10){
                         continue;
                     }
-                    wallCords[4][i]=true;
-                    wallCords[15][i]=true;
+                    wallCords[4][i]=1;
+                    wallCords[15][i]=1;
                     wallCount=wallCount+2;
                 }
                 
@@ -99,8 +99,8 @@ public class Stage{
                     if(i==9){
                         continue;
                     }
-                    wallCords[6][i]=true;
-                    wallCords[13][i]=true;
+                    wallCords[6][i]=1;
+                    wallCords[13][i]=1;
                     wallCount=wallCount+2;
                 }
                 
@@ -108,31 +108,39 @@ public class Stage{
                     if(i==4||i==9||i==11||i==16){
                         continue;
                     }
-                    wallCords[i][4]=true;
-                    wallCords[i][15]=true;
+                    wallCords[i][4]=1;
+                    wallCords[i][15]=1;
                     wallCount=wallCount+2;
                 }
                 
                 for(i=6;i<12;i++){
                     if(i==9){
-                        wallCords[11][i]=true;
-                        wallCords[9][6]=true;
-                        wallCords[10][6]=true;
-                        wallCords[9][11]=true;
-                        wallCords[10][11]=true;
+                        wallCords[11][i]=1;
+                        wallCords[9][6]=1;
+                        wallCords[10][6]=1;
+                        wallCords[9][11]=1;
+                        wallCords[10][11]=1;
                         wallCount=wallCount+5;
                         continue;
                     }
-                    wallCords[8][i]=true;
-                    wallCords[11][i]=true;
+                    wallCords[8][i]=1;
+                    wallCords[11][i]=1;
                     wallCount=wallCount+2;
                 }
                 
                 for(i=8;i<12;i++){
 
-                    wallCords[i][13]=true;
+                    wallCords[i][13]=1;
                     wallCount=wallCount++;
                 }
+                
+                //preventing coins to initialize in ghost spawn area
+                for(i=7;i<11;i++){
+                    wallCords[9][i]=2;
+                    wallCords[10][i]=2;
+                    
+                }
+                wallCords[8][9]=2;
                 
                 
                 
