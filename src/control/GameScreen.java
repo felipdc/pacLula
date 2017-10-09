@@ -5,6 +5,7 @@ import elements.Lolo;
 import elements.Element;
 import elements.Wall;
 import elements.Coin;
+import elements.Fruit;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -33,6 +34,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     private final Stage stage = new Stage(1);
     private final Wall[] walls = new Wall[stage.getWallNumber()+1];
     private final Coin[] coins = new Coin[utils.Consts.NUM_CELLS*utils.Consts.NUM_CELLS+1];
+    private final Fruit[] fruits = new Fruit[2];
  
 
     public GameScreen() {
@@ -82,6 +84,8 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             }
      
         }
+        
+        addFruit();
 
     }
     
@@ -141,6 +145,46 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         };
         Timer timer = new Timer();
         timer.schedule(task, 0, Consts.DELAY);
+    }
+    
+    private void addFruit(){
+        
+        fruits[0] = new Fruit("fire.png");
+        fruits[0].setPosition(1,9);
+        fruits[1] = new Fruit("fire.png");
+        fruits[1].setPosition(4,5);
+ 
+        
+        TimerTask spawnFruit1 = new TimerTask(){
+            public void run(){
+                //this.addElement(fruits[0]);
+                addElement(fruits[0]);
+                
+            }
+        };
+        TimerTask removeFruit1 = new TimerTask(){
+            public void run(){
+                removeElement(fruits[0]);
+            }
+        };
+        TimerTask spawnFruit2 = new TimerTask(){
+            public void run(){
+                addElement(fruits[1]);
+            }
+        };
+        TimerTask removeFruit2 = new TimerTask(){
+            public void run(){
+                removeElement(fruits[1]);
+            }
+        };
+        Timer timerFruit1 = new Timer();
+        timerFruit1.schedule(spawnFruit1, 0, 10000);
+        Timer timerFruit2 = new Timer();
+        timerFruit2.schedule(spawnFruit2, 0, 20000);
+        Timer timerRemoveFruit1 = new Timer();
+        timerRemoveFruit1.schedule(removeFruit1, 5000);
+        Timer timerRemoveFruit2 = new Timer();
+        timerRemoveFruit2.schedule(removeFruit2, 10000);
     }
     
     public void keyPressed(KeyEvent e) {

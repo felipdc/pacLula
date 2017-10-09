@@ -41,7 +41,7 @@ public class Stage{
     
     //TODO reduce number of fors 
     
-    public void generateWallCord(int stageLevel){     
+    private void generateWallCord(int stageLevel){     
         
         int i;
         
