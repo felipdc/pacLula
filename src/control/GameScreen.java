@@ -1,5 +1,6 @@
 package control;
 
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import elements.Skull;
 import elements.Lolo;
 import elements.Element;
@@ -76,7 +77,6 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
                     walls[k].setPosition(i,j);
                     this.addElement(walls[k]);
                     k++;
-                    System.out.println(k);
                     
                 }if(stage.wallCords[i][j]==0){
                     coins[z]=new Coin("money1.png");
@@ -147,7 +147,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         Fruit f1 = new Fruit("fire.png");
         TimerTask spawnCut = new TimerTask(){
             public void run(){
-                System.out.println("Adding f1");
+                LOGGER.log(Level.INFO,"Adding f1");
                 f1.setPosition(10,10);
                 addElement(f1);                 
             }
@@ -156,10 +156,10 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         TimerTask removeCut = new TimerTask(){
             public void run(){
                 if(elemArray.contains(f1)){
-                    System.out.println("Removing f1");
+                    LOGGER.log(Level.INFO,"Removing f1");
                     removeElement(f1);                            
-                    }
                 }
+            }
         };
                 
         Timer timeToRemoveCut = new Timer();
