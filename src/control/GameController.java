@@ -44,10 +44,10 @@ public class GameController {
                     //check which element was removed
                     eTempName = String.valueOf(eTemp);
                     if(eTempName.contains("Coin")){
-                        score=score+Consts.coinPoint;
+                        score=score+Consts.COIN_POINT;
                     }
                     if(eTempName.contains("Fruit")){
-                        score=score+Consts.fruitPoint;
+                        score=score+Consts.FRUIT_POINT;
                     }
                 }
             }

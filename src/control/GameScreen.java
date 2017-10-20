@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -26,7 +27,7 @@ import java.util.logging.Logger;
  * @author Luiz Eduardo
  * Baseado em material do Prof. Jose Fernando Junior
  */
-public class GameScreen extends javax.swing.JFrame implements KeyListener {
+public final class GameScreen extends javax.swing.JFrame implements KeyListener {
     
     private final Lolo lolo;
     private final ArrayList<Element> elemArray;
@@ -58,6 +59,8 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         skull.setPosition(9, 1);
         stage.wallCords[9][1]=2;
         this.addElement(skull);
+
+        fruitSpawn();
         
         int k=0;
         int z=0;
@@ -84,8 +87,6 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             }
      
         }
-        
-        addFruit();
 
     }
     
@@ -103,13 +104,6 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         /*Criamos um contexto grafico*/
         Graphics g2 = g.create(getInsets().right, getInsets().top, getWidth() - getInsets().left, getHeight() - getInsets().bottom);
-        
-        /* DESENHA CENARIO
-           Trocar essa parte por uma estrutura mais bem organizada
-           Utilizando a classe Stage
-        */
-        
-        
         
         for (int i = 0; i < Consts.NUM_CELLS; i++) {
             for (int j = 0; j < Consts.NUM_CELLS; j++) {
@@ -133,7 +127,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         if (!getBufferStrategy().contentsLost()) {
             getBufferStrategy().show();
         }
-        
+       
     }
     
     public void go() {
@@ -147,60 +141,58 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         timer.schedule(task, 0, Consts.DELAY);
     }
     
-    private void addFruit(){
+    public void fruitSpawn(){
         
-        fruits[0] = new Fruit("fire.png");
-        fruits[0].setPosition(1,9);
-        fruits[1] = new Fruit("fire.png");
-        fruits[1].setPosition(4,5);
- 
         
-        TimerTask spawnFruit1 = new TimerTask(){
+        Fruit f1 = new Fruit("fire.png");
+        TimerTask spawnCut = new TimerTask(){
             public void run(){
-                //this.addElement(fruits[0]);
-                addElement(fruits[0]);
+                System.out.println("Adding f1");
+                f1.setPosition(10,10);
+                addElement(f1);                 
+            }
+        };
+        
+        TimerTask removeCut = new TimerTask(){
+            public void run(){
+                if(elemArray.contains(f1)){
+                    System.out.println("Removing f1");
+                    removeElement(f1);                            
+                    }
+                }
+        };
                 
-            }
-        };
-        TimerTask removeFruit1 = new TimerTask(){
-            public void run(){
-                removeElement(fruits[0]);
-            }
-        };
-        TimerTask spawnFruit2 = new TimerTask(){
-            public void run(){
-                addElement(fruits[1]);
-            }
-        };
-        TimerTask removeFruit2 = new TimerTask(){
-            public void run(){
-                removeElement(fruits[1]);
-            }
-        };
-        Timer timerFruit1 = new Timer();
-        timerFruit1.schedule(spawnFruit1, 0, 10000);
-        Timer timerFruit2 = new Timer();
-        timerFruit2.schedule(spawnFruit2, 0, 20000);
-        Timer timerRemoveFruit1 = new Timer();
-        timerRemoveFruit1.schedule(removeFruit1, 5000);
-        Timer timerRemoveFruit2 = new Timer();
-        timerRemoveFruit2.schedule(removeFruit2, 10000);
+        Timer timeToRemoveCut = new Timer();
+        timeToRemoveCut.schedule(removeCut,60000, 15000);
+        
+        Timer timeToSpawnCut = new Timer();
+        timeToSpawnCut.schedule(spawnCut,61000, 61000);
+        
+        
     }
     
+    @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            lolo.setMovDirection(Lolo.MOVE_UP);
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            lolo.setMovDirection(Lolo.MOVE_DOWN);
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            lolo.setMovDirection(Lolo.MOVE_LEFT);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            lolo.setMovDirection(Lolo.MOVE_RIGHT);
-        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            lolo.setMovDirection(Lolo.STOP);
-        }
-        
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                lolo.setMovDirection(Lolo.MOVE_UP);
+                break;
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
+            case KeyEvent.VK_DOWN:
+                lolo.setMovDirection(Lolo.MOVE_DOWN);
+                break;
+            case KeyEvent.VK_LEFT:
+                lolo.setMovDirection(Lolo.MOVE_LEFT);
+                break;
+            case KeyEvent.VK_RIGHT:
+                lolo.setMovDirection(Lolo.MOVE_RIGHT);
+                break;
+            case KeyEvent.VK_SPACE:
+                lolo.setMovDirection(Lolo.STOP);
+                break;
+            default:
+                break;
+        }
     }
     
     /**
@@ -242,7 +234,6 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
     }
     
-    public void wallPaint(){
-       
-    }
+    
+    
 }

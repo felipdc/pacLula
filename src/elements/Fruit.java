@@ -5,6 +5,7 @@
  */
 package elements;
 
+import utils.Consts;
 import java.awt.Graphics;
 import utils.Drawing;
 
@@ -21,6 +22,7 @@ public class Fruit extends Element{
     
     public void autoDraw(Graphics g) {
         Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
+        
     }
     
 }
