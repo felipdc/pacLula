@@ -56,10 +56,10 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         lolo.setPosition(0, 0);
         this.addElement(lolo);
         
-        Skull skull = new Skull("ghost_1.png");
-        skull.setPosition(9, 1);
-        stage.wallCords[9][1]=2;
-        this.addElement(skull);
+        //Skull skull = new Skull("ghost_1.png");
+        //skull.setPosition(9, 1);
+        //stage.wallCords[9][1]=2;
+       // this.addElement(skull);
 
         fruitSpawn();
         
@@ -144,7 +144,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     public void fruitSpawn(){
         
         
-        Fruit f1 = new Fruit("fire.png");
+        Fruit f1 = new Fruit("fruit_cut.png");
         TimerTask spawnCut = new TimerTask(){
             public void run(){
                 LOGGER.log(Level.INFO,"Adding f1");
@@ -163,10 +163,10 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         };
                 
         Timer timeToRemoveCut = new Timer();
-        timeToRemoveCut.schedule(removeCut,60000, 15000);
+        timeToRemoveCut.schedule(removeCut,Consts.FRUIT_SPAWN_TIME-100, Consts.FRUIT_DESTROY_TIME);
         
         Timer timeToSpawnCut = new Timer();
-        timeToSpawnCut.schedule(spawnCut,61000, 61000);
+        timeToSpawnCut.schedule(spawnCut,Consts.FRUIT_SPAWN_TIME, Consts.FRUIT_SPAWN_TIME);
         
         
     }

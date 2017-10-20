@@ -23,7 +23,7 @@ public class Consts {
     public static final int COIN_POINT = 1;
     public static final int FRUIT_POINT = 10;
     
-    public static final int FRUIT_SPAWN_TIME = 200;
-    public static final int FRUIT_DESTROY_TIME = FRUIT_SPAWN_TIME+100;
+    public static final int FRUIT_SPAWN_TIME = 61000;
+    public static final int FRUIT_DESTROY_TIME = 15000;
             
 }
