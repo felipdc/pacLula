@@ -47,7 +47,7 @@ public class GameController {
                         score=score+Consts.COIN_POINT;
                     }
                     if(eTempName.contains("Fruit")){
-                        score=score+Consts.FRUIT_POINT;
+                        score=score+Consts.FRUIT1_POINT;
                     }
                 }
             }
