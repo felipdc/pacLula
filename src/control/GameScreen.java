@@ -17,6 +17,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -143,12 +144,27 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     
     public void fruitSpawn(){
         
+        //create random int object
         
+        Random rn = new Random();
+        int randomPosition[] = new int[2];
+        
+        //create fruit object
         Fruit f1 = new Fruit("fruit_cut.png");
+       
         TimerTask spawnCut = new TimerTask(){
             public void run(){
                 LOGGER.log(Level.INFO,"Adding f1");
-                f1.setPosition(10,10);
+                
+                do{
+                    //set a random position for the fruit
+                    randomPosition[0] = rn.nextInt(Consts.NUM_CELLS-1);
+                    randomPosition[1] = rn.nextInt(Consts.NUM_CELLS-1);
+                }
+                //check if the position generated is valid for the fruit
+                while(stage.wallCords[randomPosition[0]][randomPosition[1]]!=0);
+                
+                f1.setPosition(randomPosition[0],randomPosition[1]);
                 addElement(f1);                 
             }
         };
@@ -163,10 +179,10 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         };
                 
         Timer timeToRemoveCut = new Timer();
-        timeToRemoveCut.schedule(removeCut,Consts.FRUIT_SPAWN_TIME-100, Consts.FRUIT_DESTROY_TIME);
+        timeToRemoveCut.schedule(removeCut,Consts.FRUIT1_SPAWN_TIME-100, Consts.FRUIT1_DESTROY_TIME);
         
         Timer timeToSpawnCut = new Timer();
-        timeToSpawnCut.schedule(spawnCut,Consts.FRUIT_SPAWN_TIME, Consts.FRUIT_SPAWN_TIME);
+        timeToSpawnCut.schedule(spawnCut,Consts.FRUIT1_SPAWN_TIME, Consts.FRUIT1_SPAWN_TIME);
         
         
     }
