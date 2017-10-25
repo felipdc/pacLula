@@ -149,8 +149,10 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         Random rn = new Random();
         int randomPosition[] = new int[2];
         
-        //create fruit object
-        Fruit f1 = new Fruit("fruit_cut.png",1);
+        //create fruit object of type 1
+        Fruit f1 = new Fruit("fruit_cut.png",Consts.ID_FRUIT1);
+        //create fruit object of type 2
+        Fruit f2 = new Fruit("fruit_bolsa_familia.png",Consts.ID_FRUIT2);
        
         TimerTask spawnCut = new TimerTask(){
             public void run(){
@@ -177,12 +179,45 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
                 }
             }
         };
+        
+        TimerTask spawnBolsa = new TimerTask(){
+            public void run(){
+                LOGGER.log(Level.INFO,"Adding f2");
+                 do{
+                    //set a random position for the fruit
+                    randomPosition[0] = rn.nextInt(Consts.NUM_CELLS-1);
+                    randomPosition[1] = rn.nextInt(Consts.NUM_CELLS-1);
+                }
+                //check if the position generated is valid for the fruit
+                while(stage.wallCords[randomPosition[0]][randomPosition[1]]!=0);
+                
+                f2.setPosition(randomPosition[0],randomPosition[1]);
+                addElement(f2);
+            }
+        };
+        
+        TimerTask removeBolsa = new TimerTask(){
+            public void run(){
+                if(elemArray.contains(f2)){
+                    LOGGER.log(Level.INFO,"Removing f2");
+                    removeElement(f2);                            
+                }
+            }
+        };
                 
         Timer timeToRemoveCut = new Timer();
-        timeToRemoveCut.schedule(removeCut,Consts.FRUIT1_SPAWN_TIME-100, Consts.FRUIT1_DESTROY_TIME);
+        timeToRemoveCut.schedule(removeCut,Consts.FRUIT1_SPAWN_TIME-100, Consts.FRUIT_DESTROY_TIME);
+        
+        Timer timeToRemoveBolsa = new Timer();
+        timeToRemoveBolsa.schedule(removeBolsa, Consts.FRUIT2_SPAWN_TIME-100,Consts.FRUIT_DESTROY_TIME);
         
         Timer timeToSpawnCut = new Timer();
         timeToSpawnCut.schedule(spawnCut,Consts.FRUIT1_SPAWN_TIME, Consts.FRUIT1_SPAWN_TIME);
+        
+        Timer timeToSpawnBolsa = new Timer();
+        timeToSpawnBolsa.schedule(spawnBolsa,Consts.FRUIT2_SPAWN_TIME,Consts.FRUIT2_SPAWN_TIME);
+       
+        
         
         
     }
