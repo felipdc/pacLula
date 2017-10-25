@@ -21,6 +21,7 @@ public abstract class Element implements Serializable{
     protected Position pos;
     protected boolean isTransposable; // Pode passar por cima?
     protected boolean isMortal;       // Se encostar, morre?
+    protected int elementId;
 
     protected Element(String imageName) {
         this.pos = new Position(1, 1);
@@ -64,6 +65,10 @@ public abstract class Element implements Serializable{
 
     public void setTransposable(boolean isTransposable) {
         this.isTransposable = isTransposable;
+    }
+    
+    public int getElementId(){
+        return elementId;
     }
 
     abstract public void autoDraw(Graphics g);

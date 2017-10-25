@@ -9,6 +9,7 @@ import java.io.File;
  * Baseado em material do Prof. Jose Fernando Junior
  */
 public class Consts {
+    
     public static final int CELL_SIZE = 30;
     public static final int NUM_CELLS = 20;
     
@@ -22,8 +23,14 @@ public class Consts {
     
     public static final int COIN_POINT = 10;
     public static final int FRUIT1_POINT = 100;
+    public static final int FRUIT2_POINT = 500;
     
     public static final int FRUIT1_SPAWN_TIME = 61000;
     public static final int FRUIT1_DESTROY_TIME = 15000;
+    
+    public static final int ID_FRUIT1 = 1001;
+    public static final int ID_FRUIT2 = 1002;
+    public static final int ID_LOLO = 1003;
+    public static final int ID_COIN = 1004;
             
 }

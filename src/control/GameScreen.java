@@ -150,7 +150,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         int randomPosition[] = new int[2];
         
         //create fruit object
-        Fruit f1 = new Fruit("fruit_cut.png");
+        Fruit f1 = new Fruit("fruit_cut.png",1);
        
         TimerTask spawnCut = new TimerTask(){
             public void run(){

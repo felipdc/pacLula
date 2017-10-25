@@ -1,9 +1,11 @@
 package control;
 
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import elements.Element;
 import elements.Lolo;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import utils.Consts;
 
 /**
@@ -41,14 +43,16 @@ public class GameController {
             if(lLolo.overlap(eTemp)){
                 if(eTemp.isTransposable()){
                     e.remove(eTemp);
-                    //check which element was removed
-                    eTempName = String.valueOf(eTemp);
-                    if(eTempName.contains("Coin")){
+                    //check which element was eat
+                    if(eTemp.getElementId()==Consts.ID_COIN){
                         score=score+Consts.COIN_POINT;
                     }
-                    if(eTempName.contains("Fruit")){
+                    if(eTemp.getElementId()==Consts.ID_FRUIT1){
                         score=score+Consts.FRUIT1_POINT;
                     }
+                    if(eTemp.getElementId()==Consts.ID_FRUIT2){
+                        score=score+Consts.FRUIT2_POINT;
+                    }                                     
                 }
             }
             

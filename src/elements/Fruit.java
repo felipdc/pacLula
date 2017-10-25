@@ -15,9 +15,10 @@ import utils.Drawing;
  */
 public class Fruit extends Element{
     
-    public Fruit(String imageName) {
+    public Fruit(String imageName, int fruitType) {
         super(imageName);
         this.isMortal = true;
+        elementId = fruitType;
     }
     
     public void autoDraw(Graphics g) {
