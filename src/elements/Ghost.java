@@ -5,8 +5,11 @@ import utils.Drawing;
 
 public class Ghost extends Element{
 
-    public Ghost(String imageName) {
+    public Ghost(String imageName, int ghostType) {
         super(imageName);
+        this.isMortal = true;
+        this.isTransposable = false;
+        elementId = ghostType;
     }
 
     @Override

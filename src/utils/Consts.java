@@ -33,5 +33,8 @@ public class Consts {
     public static final int ID_FRUIT2 = 1002;
     public static final int ID_LOLO = 1003;
     public static final int ID_COIN = 1004;
+    public static final int ID_GHOST1 = 1005;
+    public static final int ID_GHOST2 = 1006;
+    public static final int ID_GHOST3 = 1007;
             
 }
