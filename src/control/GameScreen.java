@@ -59,7 +59,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         lolo.setPosition(5, 1);
         this.addElement(lolo);
         
-        blinky = new Blinky("ghost_1.png", Consts.ID_GHOST1, lolo);
+        blinky = new Blinky("ghost_1.png");
         blinky.setPosition(1,1);
         this.addElement(blinky);
         

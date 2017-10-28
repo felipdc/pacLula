@@ -6,7 +6,7 @@ public class Stage{
     
     private int stageLevel;
     private int wallCount=0;
-    protected final int[][] wallCords = new int[Consts.NUM_CELLS][Consts.NUM_CELLS];
+    public final int[][] wallCords = new int[Consts.NUM_CELLS][Consts.NUM_CELLS];
     
     public Stage(int level){
         generateWallCord(level);

@@ -2,6 +2,7 @@ package control;
 
 import elements.Element;
 import elements.Lolo;
+import elements.Blinky;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import utils.Consts;

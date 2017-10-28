@@ -1,5 +1,6 @@
 package elements;
 
+import control.Stage;
 import java.awt.Graphics;
 import utils.Drawing;
 
@@ -12,7 +13,8 @@ public class Ghost extends Element{
     public static final int MOVE_DOWN = 4;
     
     private int movDirection = STOP;
-        
+    private Stage stg = new Stage(1);
+    
     public Ghost(String imageName, int ghostType) {
         super(imageName);
         this.isMortal = true;
@@ -31,6 +33,22 @@ public class Ghost extends Element{
     
     public void setMovDirection(int direction){
         movDirection = direction;
+    }
+    
+    protected boolean isRightPossible(){
+        return stg.wallCords[(int)pos.getX()][(int)pos.getY()+1]!=1;
+    }
+    
+    protected boolean isLeftPossible(){
+        return stg.wallCords[(int)pos.getX()][(int)pos.getY()-1]!=1;
+    }
+    
+    protected boolean isUpPossible(){
+        return stg.wallCords[(int)pos.getX()-1][(int)pos.getY()]!=1;
+    }
+    
+    protected boolean isDownPossible(){
+        return stg.wallCords[(int)pos.getX()+1][(int)pos.getY()]!=1;
     }
     
     public void move() {
