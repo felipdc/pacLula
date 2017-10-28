@@ -11,7 +11,7 @@ public class Ghost extends Element{
     public static final int MOVE_UP = 3;
     public static final int MOVE_DOWN = 4;
     
-    private int movDirection;
+    private int movDirection = STOP;
         
     public Ghost(String imageName, int ghostType) {
         super(imageName);
@@ -23,6 +23,14 @@ public class Ghost extends Element{
     @Override
     public void autoDraw(Graphics g) {
        Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
+    }
+    
+    public void backToLastPosition(){
+        this.pos.comeBack();
+    }
+    
+    public void setMovDirection(int direction){
+        movDirection = direction;
     }
     
     public void move() {

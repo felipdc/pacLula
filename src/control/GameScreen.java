@@ -1,6 +1,7 @@
 package control;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+import elements.Blinky;
 import elements.Skull;
 import elements.Lolo;
 import elements.Element;
@@ -32,6 +33,7 @@ import java.util.logging.Logger;
 public final class GameScreen extends javax.swing.JFrame implements KeyListener {
     
     private final Lolo lolo;
+    private final Blinky blinky;
     private final ArrayList<Element> elemArray;
     private final GameController controller = new GameController();
     private final Stage stage = new Stage(1);
@@ -54,8 +56,12 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         /*Cria e adiciona elementos*/
         lolo = new Lolo("lula.png");
-        lolo.setPosition(0, 0);
+        lolo.setPosition(5, 1);
         this.addElement(lolo);
+        
+        blinky = new Blinky("ghost_1.png", Consts.ID_GHOST1, lolo);
+        blinky.setPosition(1,1);
+        this.addElement(blinky);
         
         //Skull skull = new Skull("ghost_1.png");
         //skull.setPosition(9, 1);
@@ -136,6 +142,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             
             public void run() {
                 repaint();
+                blinky.seekLolo(lolo);
             }
         };
         Timer timer = new Timer();

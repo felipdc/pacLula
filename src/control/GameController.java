@@ -1,11 +1,9 @@
 package control;
 
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import elements.Element;
 import elements.Lolo;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.logging.Level;
 import utils.Consts;
 
 /**
