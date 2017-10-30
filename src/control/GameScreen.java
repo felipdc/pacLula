@@ -8,6 +8,7 @@ import elements.Element;
 import elements.Wall;
 import elements.Coin;
 import elements.Fruit;
+import java.awt.Dimension;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -43,6 +44,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
  
 
     public GameScreen() {
+        
         Drawing.setGameScreen(this);
         initComponents();
         
@@ -63,11 +65,6 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         blinky.setPosition(1,1);
         this.addElement(blinky);
         
-        //Skull skull = new Skull("ghost_1.png");
-        //skull.setPosition(9, 1);
-        //stage.wallCords[9][1]=2;
-       // this.addElement(skull);
-
         fruitSpawn();
         
         int k=0;
