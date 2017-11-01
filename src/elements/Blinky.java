@@ -33,6 +33,14 @@ public class Blinky extends Ghost{
         
     }
     
+    private void correctPosition(){
+        if((abs(this.pos.getX()-(int)(this.pos.getX()+0.5d)))-(abs(this.pos.getY()-(int)(this.pos.getY()+0.5d)))>0){
+            this.setPosition(((int)(pos.getX()+0.5d)), this.pos.getX());
+        }else{
+            this.setPosition(this.pos.getX(), ((int)(pos.getY()+0.5d)));
+        }
+    }
+    
     public void seekX(String xPrior, String yPrior, int tryNum){
         //right is x priority and first try to move
         if(tryNum==0&&"RIGHT".equals(xPrior)){
@@ -79,7 +87,11 @@ public class Blinky extends Ghost{
             if(this.isRightPossible()){
                 this.moveRight();
             }else{
-                this.moveLeft();
+                if(this.isLeftPossible()){
+                    this.moveLeft();
+                }else{
+                    correctPosition();
+                }
             }
         }
         
@@ -131,7 +143,11 @@ public class Blinky extends Ghost{
             if(this.isDownPossible()){
                 this.moveDown();
             }else{
-                this.moveUp();
+                if(this.isUpPossible()){
+                    this.moveUp();
+                }else{
+                    correctPosition();
+                }
             }
         }
         

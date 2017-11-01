@@ -58,7 +58,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         /*Cria e adiciona elementos*/
         lolo = new Lolo("lula.png");
-        lolo.setPosition(1, 11);
+        lolo.setPosition(3, 11);
         this.addElement(lolo);
         
         blinky = new Blinky("ghost_1.png");
@@ -124,7 +124,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore());
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore());;
         
         g.dispose();
         g2.dispose();
@@ -230,20 +230,20 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                lolo.setMovDirection(Lolo.MOVE_UP);
+                lolo.setDesireDirection(Lolo.MOVE_UP);
                 break;
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
             case KeyEvent.VK_DOWN:
-                lolo.setMovDirection(Lolo.MOVE_DOWN);
+                lolo.setDesireDirection(Lolo.MOVE_DOWN);
                 break;
             case KeyEvent.VK_LEFT:
-                lolo.setMovDirection(Lolo.MOVE_LEFT);
+                lolo.setDesireDirection(Lolo.MOVE_LEFT);
                 break;
             case KeyEvent.VK_RIGHT:
-                lolo.setMovDirection(Lolo.MOVE_RIGHT);
+                lolo.setDesireDirection(Lolo.MOVE_RIGHT);
                 break;
             case KeyEvent.VK_SPACE:
-                lolo.setMovDirection(Lolo.STOP);
+                lolo.setDesireDirection(Lolo.STOP);
                 break;
             default:
                 break;
