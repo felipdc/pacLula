@@ -61,37 +61,35 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         lolo.setPosition(3, 11);
         this.addElement(lolo);
         
+        //adding ghost blinky to stage
         blinky = new Blinky("ghost_1.png");
         blinky.setPosition(1,1);
         this.addElement(blinky);
         
+        //start fruit counter
         fruitSpawn();
         
         int k=0;
         int z=0;
         
-        //adding walls and coins to stage 
-        
+        //adding walls and coins to stage        
         for(int i=0;i<Consts.NUM_CELLS;i++){
             for(int j=0;j<Consts.NUM_CELLS;j++){
                     
-                if(stage.wallCords[i][j]==1){
-                    
+                if(stage.wallCords[i][j]==1){                
                     walls[k]=new Wall("wall1.png");
                     walls[k].setPosition(i,j);
                     this.addElement(walls[k]);
-                    k++;
-                    
-                }if(stage.wallCords[i][j]==0){
+                    k++;  
+                }
+                if(stage.wallCords[i][j]==0){
                     coins[z]=new Coin("money1.png");
                     coins[z].setPosition(i,j);
                     this.addElement(coins[z]);
                     z++;
                 }
-            }
-     
+            } 
         }
-
     }
     
     public final void addElement(Element elem) {
@@ -124,7 +122,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore());;
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore() + "blinky -> " + blinky.getGhostPosition());;
         
         g.dispose();
         g2.dispose();
@@ -139,6 +137,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             
             public void run() {
                 repaint();
+                //start blinky search for lolo
                 blinky.seekLolo(lolo);
             }
         };
@@ -149,7 +148,6 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     public void fruitSpawn(){
         
         //create random int object
-        
         Random rn = new Random();
         int randomPosition[] = new int[2];
         
@@ -220,9 +218,6 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         
         Timer timeToSpawnBolsa = new Timer();
         timeToSpawnBolsa.schedule(spawnBolsa,Consts.FRUIT2_SPAWN_TIME,Consts.FRUIT2_SPAWN_TIME);
-       
-        
-        
         
     }
     
@@ -288,7 +283,5 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     @Override
     public void keyReleased(KeyEvent e) {
     }
-    
-    
     
 }

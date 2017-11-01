@@ -54,9 +54,7 @@ public class GameController {
                     }                                     
                 }
             }
-            
-        }
-        
+        }       
         lLolo.move();
     }
     public boolean isValidPosition(ArrayList<Element> elemArray, Element elem){

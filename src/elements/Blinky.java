@@ -3,11 +3,15 @@ package elements;
 import control.Stage;
 import static java.lang.Math.abs;
 import utils.Consts;
-/**
- *
- * @author Felipe
- */
+
 public class Blinky extends Ghost{
+    
+    private static final int LEFT = 1;
+    private static final int RIGHT = 2;
+    private static final int UP = 3;
+    private static final int DOWN = 4;
+    private static final int X = 5;
+    private static final int Y = 5;
     
     private Stage stg = new Stage(1);
     
@@ -19,18 +23,16 @@ public class Blinky extends Ghost{
         
         double yDist = pos.getX() - llolo.pos.getX();
         double xDist = pos.getY() - llolo.pos.getY();
-        String axisPrior = axisPriority(yDist,xDist);
-        String xPrior = xPriority(xDist);
-        String yPrior = yPriority(yDist);
+        int axisPrior = axisPriority(yDist,xDist);
+        int xPrior = xPriority(xDist);
+        int yPrior = yPriority(yDist);
         int tryNum = 0;
         
-        if("X".equals(axisPrior)){
+        if(axisPrior==X){
             seekX(xPrior,yPrior,tryNum);
         }else{
             seekY(xPrior,yPrior,tryNum);
         }
-        
-        
     }
     
     private void correctPosition(){
@@ -41,9 +43,9 @@ public class Blinky extends Ghost{
         }
     }
     
-    public void seekX(String xPrior, String yPrior, int tryNum){
+    public void seekX(int xPrior, int yPrior, int tryNum){
         //right is x priority and first try to move
-        if(tryNum==0&&"RIGHT".equals(xPrior)){
+        if(tryNum==0&&xPrior==RIGHT){
             if(this.isRightPossible()){
                 this.moveRight();
             }else{
@@ -51,7 +53,7 @@ public class Blinky extends Ghost{
             }
         }
         //left is x priority and first try to move
-        if(tryNum==0&&"LEFT".equals(xPrior)){
+        if(tryNum==0&&xPrior==LEFT){
             if(this.isLeftPossible()){
                 this.moveLeft();
             }else{
@@ -59,7 +61,7 @@ public class Blinky extends Ghost{
             }
         }
         
-        if(tryNum==1&&"RIGHT".equals(xPrior)){
+        if(tryNum==1&&xPrior==RIGHT){
             if(this.isRightPossible()){
                 this.moveRight();
             }else{
@@ -71,7 +73,7 @@ public class Blinky extends Ghost{
             }
         }
         
-        if(tryNum==1&&"LEFT".equals(xPrior)){
+        if(tryNum==1&&xPrior==LEFT){
             if(this.isLeftPossible()){
                 this.moveLeft();
             }else{
@@ -93,13 +95,12 @@ public class Blinky extends Ghost{
                     correctPosition();
                 }
             }
-        }
-        
+        }       
     }
     
-    public void seekY(String xPrior, String yPrior, int tryNum){
+    public void seekY(int xPrior, int yPrior, int tryNum){
         
-        if(tryNum==0&&"UP".equals(yPrior)){
+        if(tryNum==0&&yPrior==UP){
             if(this.isUpPossible()){
                 this.moveUp();
             }else{
@@ -107,7 +108,7 @@ public class Blinky extends Ghost{
             }
         }
         
-        if(tryNum==0&&"DOWN".equals(yPrior)){
+        if(tryNum==0&&yPrior==DOWN){
             if(this.isDownPossible()){
                 this.moveDown();
             }else{
@@ -115,7 +116,7 @@ public class Blinky extends Ghost{
             }
         }
         
-        if(tryNum==1&&"UP".equals(yPrior)){
+        if(tryNum==1&&yPrior==UP){
             if(this.isUpPossible()){
                 this.moveUp();
             }else{
@@ -127,7 +128,7 @@ public class Blinky extends Ghost{
             }
         }
         
-        if(tryNum==1&&"DOWN".equals(yPrior)){
+        if(tryNum==1&&yPrior==DOWN){
             if(this.isDownPossible()){
                 this.moveDown();
             }else{
@@ -149,32 +150,30 @@ public class Blinky extends Ghost{
                     correctPosition();
                 }
             }
-        }
-        
+        }   
     }
     
-    public String xPriority(double xDist){
+    public int xPriority(double xDist){
         if(xDist<0){
-                return "RIGHT";               
+                return RIGHT;               
             }else{
-                return "LEFT";
+                return LEFT;
             }
     }
     
-    public String yPriority(double yDist){
+    public int yPriority(double yDist){
         if(yDist>0){
-                return "UP";               
+                return UP;               
             }else{
-                return "DOWN";
+                return DOWN;
             }
     }
     
-    public String axisPriority(double yDist,double xDist){
+    public int axisPriority(double yDist,double xDist){
         if(abs(xDist)>abs(yDist)){
-            return "X";
+            return X;
         }else{
-            return "Y";
+            return Y;
         }
     }
-    
 }

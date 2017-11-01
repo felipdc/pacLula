@@ -12,31 +12,23 @@ public class Stage{
         generateWallCord(level);
     }
     
-    public String showStageLevel(){
-        
+    public String showStageLevel(){      
         String stageLv = String.valueOf(stageLevel);
         return stageLv;
-        
     }
     
-    public void increaseStage(){
-        
-        stageLevel++;
-        
+    public void increaseStage(){    
+        stageLevel++;       
     }
     
-    public String retrieveGround(int stageLevel){
-        
-        switch (stageLevel){
-            
+    public String retrieveGround(int stageLevel){       
+        switch (stageLevel){            
             case 1:
                 return "ground1.png";
             case 2:
                 return "ground2.png";
-        }
-        
-        return "";
-        
+        }        
+        return "";      
     }
     
     //TODO reduce number of fors 
@@ -143,15 +135,6 @@ public class Stage{
                     
                 }
                 wallCords[8][9]=2;
-                
-                
-                
-                
-                
-                
-        //} 
-             
-        
     }
     
     
@@ -159,6 +142,4 @@ public class Stage{
         return wallCount;
     }
     
-    
-  
 }
