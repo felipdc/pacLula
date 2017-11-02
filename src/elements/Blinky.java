@@ -11,7 +11,7 @@ public class Blinky extends Ghost{
     private static final int UP = 3;
     private static final int DOWN = 4;
     private static final int X = 5;
-    private static final int Y = 5;
+    private static final int Y = 6;
     
     private Stage stg = new Stage(1);
     

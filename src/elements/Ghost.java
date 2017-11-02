@@ -38,9 +38,6 @@ public class Ghost extends Element{
     }
     
     protected boolean isRightPossible(){
-        if(pos.getX()%1!=0&&pos.getY()%1!=0){
-            return false;
-        }
         if(lastMovDirection==MOVE_UP){
             return stg.wallCords[(int)(pos.getX()+0.9d)][(int)(pos.getY())+1]!=1;
         }
@@ -48,9 +45,6 @@ public class Ghost extends Element{
     }
     
     protected boolean isLeftPossible(){
-        if(pos.getX()%1!=0&&pos.getY()%1!=0){
-            return false;
-        }
         if(lastMovDirection==MOVE_UP){
             return stg.wallCords[(int)(pos.getX()+0.9d)][(int)(pos.getY())-1]!=1;
         }
@@ -58,9 +52,6 @@ public class Ghost extends Element{
     }
     
     protected boolean isUpPossible(){
-        if(pos.getX()%1!=0&&pos.getY()%1!=0){
-            return false;
-        }
         if(lastMovDirection==MOVE_LEFT){
             return stg.wallCords[(int)(pos.getX())-1][(int)(pos.getY()+0.9d)]!=1;
         }
@@ -68,9 +59,6 @@ public class Ghost extends Element{
     }
     
     protected boolean isDownPossible(){
-        if(pos.getX()%1!=0&&pos.getY()%1!=0){
-            return false;
-        }
         if(lastMovDirection==MOVE_LEFT){
             return stg.wallCords[(int)(pos.getX())+1][(int)(pos.getY()-0.9d)]!=1;
         }
