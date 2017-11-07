@@ -12,15 +12,8 @@ import java.io.Serializable;
  * Baseado em material do Prof. Jose Fernando Junior
  */
 public class Lolo extends Element  implements Serializable{
-    
-    public static final int STOP = 0;
-    public static final int MOVE_LEFT = 1;
-    public static final int MOVE_RIGHT = 2;
-    public static final int MOVE_UP = 3;
-    public static final int MOVE_DOWN = 4;
-    
+
     private int movDirection = STOP;
-    private int lastMovDirection = STOP;
     private int desireDirection = STOP;
     private Stage stg = new Stage(1);
     

@@ -21,6 +21,26 @@ public class Blinky extends Ghost{
 
     public void seekLolo(Lolo llolo){
         
+        updateSensPosition();
+        
+        if(keepCurrentPath()){
+            switch(getLastMovDirection()){
+                case MOVE_LEFT:
+                    this.moveLeft();
+                    break;
+                case MOVE_RIGHT:
+                    this.moveRight();
+                    break;
+                case MOVE_UP:
+                    this.moveUp();
+                    break;
+                case MOVE_DOWN:
+                    this.moveDown();
+                    break;
+            }
+            return;
+        }
+        
         double yDist = pos.getX() - llolo.pos.getX();
         double xDist = pos.getY() - llolo.pos.getY();
         int axisPrior = axisPriority(yDist,xDist);
@@ -35,13 +55,6 @@ public class Blinky extends Ghost{
         }
     }
     
-    private void correctPosition(){
-        if((abs(this.pos.getX()-(int)(this.pos.getX()+0.5d)))-(abs(this.pos.getY()-(int)(this.pos.getY()+0.5d)))>0){
-            this.setPosition(((int)(pos.getX()+0.5d)), this.pos.getX());
-        }else{
-            this.setPosition(this.pos.getX(), ((int)(pos.getY()+0.5d)));
-        }
-    }
     
     public void seekX(int xPrior, int yPrior, int tryNum){
         //right is x priority and first try to move
@@ -91,8 +104,6 @@ public class Blinky extends Ghost{
             }else{
                 if(this.isLeftPossible()){
                     this.moveLeft();
-                }else{
-                    correctPosition();
                 }
             }
         }       
@@ -146,8 +157,6 @@ public class Blinky extends Ghost{
             }else{
                 if(this.isUpPossible()){
                     this.moveUp();
-                }else{
-                    correctPosition();
                 }
             }
         }   

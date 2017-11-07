@@ -6,16 +6,11 @@ import utils.Drawing;
 
 public class Ghost extends Element{
     
-    public static final int STOP = 0;
-    public static final int MOVE_LEFT = 1;
-    public static final int MOVE_RIGHT = 2;
-    public static final int MOVE_UP = 3;
-    public static final int MOVE_DOWN = 4;
     
     private int movDirection = STOP;
-    private int lastMovDirection = STOP;
-    private int desireDirection = STOP;
     private Stage stg = new Stage(1);
+    private int sensXPosition;
+    private int sensYPosition;
     
     public Ghost(String imageName, int ghostType) {
         super(imageName);
@@ -37,32 +32,45 @@ public class Ghost extends Element{
         movDirection = direction;
     }
     
+    public void updateSensPosition(){
+        sensXPosition = (int)(this.pos.getX()*10);
+        sensYPosition = (int)(this.pos.getY()*10);
+    }
+    
     protected boolean isRightPossible(){
-        if(lastMovDirection==MOVE_UP){
-            return stg.wallCords[(int)(pos.getX()+0.9d)][(int)(pos.getY())+1]!=1;
-        }
-        return stg.wallCords[(int)pos.getX()][(int)(pos.getY())+1]!=1;
+        
+        if((sensXPosition%10)!=0)
+            return false;
+        return stg.wallCords[sensXPosition/10][(sensYPosition+10)/10]!=1;
     }
     
     protected boolean isLeftPossible(){
-        if(lastMovDirection==MOVE_UP){
-            return stg.wallCords[(int)(pos.getX()+0.9d)][(int)(pos.getY())-1]!=1;
-        }
-        return stg.wallCords[(int)pos.getX()][(int)(pos.getY())-1]!=1;
+        
+        if((sensXPosition%10)!=0)
+            return false;
+
+        return stg.wallCords[sensXPosition/10][(sensYPosition-10)/10]!=1;
+ 
     }
     
     protected boolean isUpPossible(){
+        
+        if((sensYPosition%10)!=0)
+            return false;
         if(lastMovDirection==MOVE_LEFT){
-            return stg.wallCords[(int)(pos.getX())-1][(int)(pos.getY()+0.9d)]!=1;
+           System.out.println("go");
         }
-        return stg.wallCords[(int)(pos.getX())-1][(int)(pos.getY())]!=1;
+        return stg.wallCords[(sensXPosition-10)/10][sensYPosition/10]!=1;
     }
     
     protected boolean isDownPossible(){
+        
+        if((sensYPosition%10)!=0)
+            return false;
         if(lastMovDirection==MOVE_LEFT){
-            return stg.wallCords[(int)(pos.getX())+1][(int)(pos.getY()-0.9d)]!=1;
+           System.out.println("go");
         }
-        return stg.wallCords[(int)(pos.getX())+1][(int)(pos.getY())]!=1;
+        return stg.wallCords[(sensXPosition+10)/10][sensYPosition/10]!=1;
     }
     
     public String getGhostPosition(){
@@ -70,6 +78,52 @@ public class Ghost extends Element{
         String sPosY = Double.toString(this.pos.getY());
         
         return sPosX +" "+ sPosY;
+    }
+    
+    public boolean keepCurrentPath(){
+        
+        switch(lastMovDirection){
+            case MOVE_LEFT:
+                if(!isLeftPossible())
+                    return false;
+                if(isUpPossible())
+                    return false;
+                if(isDownPossible())
+                    return false;               
+                break;
+            case MOVE_RIGHT:
+                if(!isRightPossible())
+                    return false;
+                if(isUpPossible())
+                    return false;
+                if(isDownPossible())
+                    return false; 
+                break;
+            case MOVE_UP:
+                if(!isUpPossible())
+                    return false;
+                if(isRightPossible())
+                    return false;
+                if(isLeftPossible())
+                    return false;
+                break;
+            case MOVE_DOWN:
+                if(!isDownPossible())
+                    return false;  
+                if(isRightPossible())
+                    return false;
+                if(isLeftPossible())
+                    return false;
+                break;
+            case STOP:
+                return false;
+        }
+             
+        return true;
+    }
+    
+    public int getLastMovDirection(){
+        return lastMovDirection;
     }
     
     public void move() {
