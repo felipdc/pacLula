@@ -18,11 +18,21 @@ public class Blinky extends Ghost{
     public Blinky(String imageName) {
         super(imageName, Consts.ID_GHOST1);
     }
+    
+    public boolean checkIfLoloIsDead(Lolo llolo){
+        return llolo.overlap(this);
+    }
 
     public void seekLolo(Lolo llolo){
         
+        //Check if blinky got lolo
+        if(checkIfLoloIsDead(llolo))
+            return;
+        
+        //Update large ghost position
         updateSensPosition();
         
+        //Check if blinky will stay in current path
         if(keepCurrentPath()){
             switch(getLastMovDirection()){
                 case MOVE_LEFT:
