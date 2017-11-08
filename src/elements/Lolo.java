@@ -38,6 +38,10 @@ public class Lolo extends Element  implements Serializable{
         desireDirection = direction;
     }
     
+    public int getLastMovDirection(){
+        return lastMovDirection;
+    }
+    
     public int lastDirection(){
         return lastMovDirection;
     }

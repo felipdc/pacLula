@@ -29,7 +29,8 @@ public class StartScreen extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        
+        drawInitButton();
+        drawCloseButton();
     }
     
  
@@ -132,6 +133,21 @@ public class StartScreen extends javax.swing.JFrame {
                 new StartScreen().setVisible(true);
             }
         });
+    }
+    
+    private void drawInitButton(){
+        initButton.setOpaque(false);
+        initButton.setContentAreaFilled(false);
+        //initButton.setBorderPainted(false);
+        initButton.setFocusPainted(false);
+    }
+    
+    private void drawCloseButton(){
+        closeButton.setOpaque(false);
+        closeButton.setContentAreaFilled(false);
+        //closeButton.setBorderPainted(false);
+        closeButton.setFocusPainted(false);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
