@@ -8,6 +8,7 @@ import elements.Element;
 import elements.Wall;
 import elements.Coin;
 import elements.Fruit;
+import elements.Pinky;
 import java.awt.Dimension;
 import utils.Consts;
 import utils.Drawing;
@@ -35,6 +36,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     
     private final Lolo lolo;
     private final Blinky blinky;
+    private final Pinky pinky;
     private final ArrayList<Element> elemArray;
     private final GameController controller = new GameController();
     private final Stage stage = new Stage(1);
@@ -64,7 +66,12 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         //adding ghost blinky to stage
         blinky = new Blinky("ghost_1.png");
         blinky.setPosition(1,1);
-        this.addElement(blinky);
+        //this.addElement(blinky);
+        
+        //adding ghost pinky to stage
+        pinky = new Pinky("ghost_1.png");
+        pinky.setPosition(1, 2);
+        this.addElement(pinky);
         
         //start fruit counter
         fruitSpawn();
@@ -122,7 +129,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore() + "blinky -> " + blinky.getGhostPosition());;
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore() + "pinky -> " + pinky.getGhostPosition());;
         
         g.dispose();
         g2.dispose();
@@ -137,8 +144,9 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             
             public void run() {
                 repaint();
-                //start blinky search for lolo
-                blinky.seekLolo(lolo);
+                //start blinky and pinky search for lolo
+                //blinky.seekLolo(lolo);
+                pinky.seekLolo(lolo);
             }
         };
         Timer timer = new Timer();

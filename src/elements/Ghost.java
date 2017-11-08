@@ -41,6 +41,9 @@ public class Ghost extends Element{
         
         if((sensXPosition%10)!=0)
             return false;
+        
+        System.out.println(sensXPosition +" "+ sensYPosition);
+        
         return stg.wallCords[sensXPosition/10][(sensYPosition+10)/10]!=1;
     }
     
@@ -48,6 +51,9 @@ public class Ghost extends Element{
         
         if((sensXPosition%10)!=0)
             return false;
+                    
+        System.out.println(sensXPosition +" "+ sensYPosition);
+            
 
         return stg.wallCords[sensXPosition/10][(sensYPosition-10)/10]!=1;
  
@@ -57,9 +63,10 @@ public class Ghost extends Element{
         
         if((sensYPosition%10)!=0)
             return false;
-        if(lastMovDirection==MOVE_LEFT){
-          // System.out.println("go");
-        }
+        
+        System.out.println(sensXPosition +" "+ sensYPosition);
+
+        
         return stg.wallCords[(sensXPosition-10)/10][sensYPosition/10]!=1;
     }
     
@@ -67,9 +74,9 @@ public class Ghost extends Element{
         
         if((sensYPosition%10)!=0)
             return false;
-        if(lastMovDirection==MOVE_LEFT){
-          // System.out.println("go");
-        }
+        
+        System.out.println(sensXPosition +" "+ sensYPosition);
+
         return stg.wallCords[(sensXPosition+10)/10][sensYPosition/10]!=1;
     }
     
