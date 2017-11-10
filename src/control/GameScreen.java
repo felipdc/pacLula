@@ -65,12 +65,12 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         
         //adding ghost blinky to stage
         blinky = new Blinky("ghost_1.png");
-        blinky.setPosition(18,5);
+        blinky.setPosition(9,7);
         this.addElement(blinky);
         
         //adding ghost pinky to stage
         pinky = new Pinky("ghost_1.png");
-        pinky.setPosition(18, 5);
+        pinky.setPosition(10, 8);
         this.addElement(pinky);
         
         //start fruit counter

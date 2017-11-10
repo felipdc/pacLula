@@ -54,21 +54,41 @@ public class Lolo extends Element  implements Serializable{
         return pos.getY();  
     }
     
+    public void teleportLolo(){
+        if(pos.getX()==10&&pos.getY()==0){
+            this.setPosition(10, 19);
+        }else{
+            this.setPosition(10,0);
+        }
+    }
+    
     public boolean isDirectionPossible(int desireDirection){
         if(pos.getX()%1!=0&&0!=pos.getY()%1){
             return false;
         }
-        if(desireDirection==MOVE_LEFT&&lastMovDirection==MOVE_UP){
-            return stg.wallCords[(int)(pos.getX()+0.9d)][(int)(pos.getY())-1]!=1;
-        }
-        if(desireDirection==MOVE_LEFT){
-            return stg.wallCords[(int)pos.getX()][(int)(pos.getY())-1]!=1;
-        }
-        if(desireDirection==MOVE_RIGHT&&lastMovDirection==MOVE_UP){
-            return stg.wallCords[(int)(pos.getX()+0.9d)][(int)(pos.getY())+1]!=1;
-        }
-        if(desireDirection==MOVE_RIGHT){
-            return stg.wallCords[(int)pos.getX()][(int)(pos.getY())+1]!=1;
+        
+        
+        //prevents error when lolo is in linked walls
+        
+        try{
+            if(desireDirection==MOVE_LEFT&&lastMovDirection==MOVE_UP){
+                return stg.wallCords[(int)(pos.getX()+0.9d)][(int)(pos.getY())-1]!=1;
+            }
+            if(desireDirection==MOVE_LEFT){
+                return stg.wallCords[(int)pos.getX()][(int)(pos.getY())-1]!=1;
+            }        
+
+            if(desireDirection==MOVE_RIGHT&&lastMovDirection==MOVE_UP){
+                return stg.wallCords[(int)(pos.getX()+0.9d)][(int)(pos.getY())+1]!=1;
+            }
+            if(desireDirection==MOVE_RIGHT){
+                return stg.wallCords[(int)pos.getX()][(int)(pos.getY())+1]!=1;
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+                
+            teleportLolo();
+            return true;
+          
         }
         if(desireDirection==MOVE_UP&&lastMovDirection==MOVE_LEFT){
             return stg.wallCords[(int)(pos.getX())-1][(int)(pos.getY()+0.9d)]!=1;
