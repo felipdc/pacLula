@@ -108,18 +108,22 @@ public class Pinky extends Ghost{
                 if(isLeftPossible()){
                     this.moveLeft();
                 }
+                break;
             case RIGHT:
                 if(isRightPossible()){
                     this.moveRight();
                 }
+                break;
             case UP:
                 if(isUpPossible()){
                     this.moveUp();
                 }
+                break;
             case DOWN:
                 if(isDownPossible()){
                     this.moveDown();
                 }
+                break;
         }
         
     }

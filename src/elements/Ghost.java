@@ -35,6 +35,9 @@ public class Ghost extends Element{
     public void updateSensPosition(){
         sensXPosition = (int)(this.pos.getX()*10);
         sensYPosition = (int)(this.pos.getY()*10);
+        
+        //System.out.println("xs = "+sensXPosition+" x = "+sensXPosition/10);
+        //System.out.println("ys = "+sensYPosition+" y = "+sensYPosition/10);
     }
     
     protected boolean isRightPossible(){
@@ -42,9 +45,17 @@ public class Ghost extends Element{
         if((sensXPosition%10)!=0)
             return false;
         
-        System.out.println(sensXPosition +" "+ sensYPosition);
+        //System.out.println(sensXPosition +" "+ sensYPosition);
         
-        return stg.wallCords[sensXPosition/10][(sensYPosition+10)/10]!=1;
+        if(stg.wallCords[sensXPosition/10][(sensYPosition+10)/10]!=1){
+            //System.out.println("Right is now possible in position: ");
+            //System.out.println(sensXPosition +" "+ sensYPosition);
+            return true;
+        }else{
+            return false;
+        }
+        
+        //return stg.wallCords[sensXPosition/10][(sensYPosition+10)/10]!=1;
     }
     
     protected boolean isLeftPossible(){
@@ -52,10 +63,17 @@ public class Ghost extends Element{
         if((sensXPosition%10)!=0)
             return false;
                     
-        System.out.println(sensXPosition +" "+ sensYPosition);
-            
+        //System.out.println(sensXPosition +" "+ sensYPosition);
+        
+        if(stg.wallCords[sensXPosition/10][(sensYPosition-1)/10]!=1){
+            //System.out.println("Left is now possible in position: ");
+            //System.out.println(sensXPosition +" "+ sensYPosition);
+            return true;
+        }else{
+            return false;
+        }
 
-        return stg.wallCords[sensXPosition/10][(sensYPosition-10)/10]!=1;
+        //return stg.wallCords[sensXPosition/10][(sensYPosition-10)/10]!=1;
  
     }
     
@@ -64,10 +82,17 @@ public class Ghost extends Element{
         if((sensYPosition%10)!=0)
             return false;
         
-        System.out.println(sensXPosition +" "+ sensYPosition);
-
+        //System.out.println(sensXPosition +" "+ sensYPosition);
+        if(stg.wallCords[(sensXPosition-1)/10][sensYPosition/10]!=1){
+            //System.out.println("Up is now possible in position: ");
+            //System.out.println(sensXPosition +" "+ sensYPosition);
+            return true;
+        }else{
+            
+            return false;
+        }
         
-        return stg.wallCords[(sensXPosition-10)/10][sensYPosition/10]!=1;
+        //return stg.wallCords[(sensXPosition-10)/10][sensYPosition/10]!=1;
     }
     
     protected boolean isDownPossible(){
@@ -75,11 +100,21 @@ public class Ghost extends Element{
         if((sensYPosition%10)!=0)
             return false;
         
-        System.out.println(sensXPosition +" "+ sensYPosition);
+       // System.out.println(sensXPosition +" "+ sensYPosition);
 
-        return stg.wallCords[(sensXPosition+10)/10][sensYPosition/10]!=1;
+       if(stg.wallCords[(sensXPosition+10)/10][sensYPosition/10]!=1){
+            //System.out.println("Down is now possible in position: ");
+            //System.out.println(sensXPosition +" "+ sensYPosition);
+            return true;
+        }else{
+            
+            return false;
+        }
+        
+       
+       // return stg.wallCords[(sensXPosition+10)/10][sensYPosition/10]!=1;
     }
-    
+        
     public String getGhostPosition(){
         String sPosX = Double.toString(this.pos.getX());
         String sPosY = Double.toString(this.pos.getY());

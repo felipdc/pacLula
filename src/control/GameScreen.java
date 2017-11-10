@@ -60,17 +60,17 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         /*Cria e adiciona elementos*/
         lolo = new Lolo("lula.png");
-        lolo.setPosition(3, 11);
+        lolo.setPosition(1, 1);
         this.addElement(lolo);
         
         //adding ghost blinky to stage
         blinky = new Blinky("ghost_1.png");
-        blinky.setPosition(1,1);
-        //this.addElement(blinky);
+        blinky.setPosition(18,5);
+        this.addElement(blinky);
         
         //adding ghost pinky to stage
         pinky = new Pinky("ghost_1.png");
-        pinky.setPosition(1, 2);
+        pinky.setPosition(18, 5);
         this.addElement(pinky);
         
         //start fruit counter
@@ -145,7 +145,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             public void run() {
                 repaint();
                 //start blinky and pinky search for lolo
-                //blinky.seekLolo(lolo);
+                blinky.seekLolo(lolo);
                 pinky.seekLolo(lolo);
             }
         };
