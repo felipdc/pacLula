@@ -8,6 +8,7 @@ import elements.Element;
 import elements.Wall;
 import elements.Coin;
 import elements.Fruit;
+import elements.Glyde;
 import elements.Inky;
 import elements.Pinky;
 import java.awt.Dimension;
@@ -39,6 +40,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     private final Blinky blinky;
     private final Pinky pinky;
     private final Inky inky;
+    private final Glyde glyde;
     private final ArrayList<Element> elemArray;
     private final GameController controller = new GameController();
     private final Stage stage = new Stage(1);
@@ -75,11 +77,15 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         pinky.setPosition(10, 8);
         this.addElement(pinky);
         
-        //adding ghost inky to stage
-        
+        //adding ghost inky to stage      
         inky = new Inky("ghost_1.png");
         inky.setPosition(10,7);
         this.addElement(inky);
+        
+        //adding ghost glyde to stage
+        glyde = new Glyde("ghost_1.png");
+        glyde.setPosition(9,8);
+        this.addElement(glyde);
         
         //start fruit counter
         fruitSpawn();
@@ -152,10 +158,11 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             
             public void run() {
                 repaint();
-                //start blinky and pinky search for lolo
+                //start ghost search for lolo
                 blinky.seekLolo(lolo);
                 pinky.seekLolo(lolo);
                 inky.seekLolo(lolo);
+                glyde.seekLolo(lolo);
             }
         };
         Timer timer = new Timer();
