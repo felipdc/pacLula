@@ -49,6 +49,15 @@ public class Pinky extends Ghost{
             return;
         }
         
+         //check if the movement will be random
+        Random rn = new Random();
+        int randomMovement= rn.nextInt(11);
+        
+        if(randomMovement>8){
+            randomMove();
+            return;
+        }
+        
         if(llolo.getLastMovDirection()==MOVE_RIGHT||llolo.getLastMovDirection()==MOVE_LEFT){
             parallelToX(llolo.getLastMovDirection());
         }else{
@@ -124,6 +133,87 @@ public class Pinky extends Ghost{
                     this.moveDown();
                 }
                 break;
+        }
+        
+    }
+    
+    public void randomMove(){
+          
+        Random rn = new Random();
+        int randomDirection = rn.nextInt(4);
+        
+        switch(randomDirection){
+            case LEFT:
+                if(isLeftPossible()){
+                    this.moveLeft();
+                    break;
+                }
+                if(isRightPossible()){
+                    this.moveRight();
+                    break;
+                }
+                if(isUpPossible()){
+                    this.moveUp();
+                    break;
+                }
+                if(isDownPossible()){
+                    this.moveDown();
+                    break;
+                }
+                return;
+            case RIGHT:
+                if(isRightPossible()){
+                    this.moveRight();
+                    break;
+                }
+                if(isLeftPossible()){
+                    this.moveLeft();
+                    break;
+                }
+                if(isUpPossible()){
+                    this.moveUp();
+                    break;
+                }
+                if(isDownPossible()){
+                    this.moveDown();
+                    break;
+                }
+                return;
+            case UP:
+                if(isUpPossible()){
+                    this.moveUp();
+                    break;
+                }
+                if(isRightPossible()){
+                    this.moveRight();
+                    break;
+                }
+                if(isLeftPossible()){
+                    this.moveLeft();
+                    break;
+                }
+                if(isDownPossible()){
+                    this.moveDown();
+                    break;
+                }
+                return;
+            case DOWN:
+                if(isDownPossible()){
+                    this.moveDown();
+                    break;
+                }
+                if(isRightPossible()){
+                    this.moveRight();
+                    break;
+                }
+                if(isUpPossible()){
+                    this.moveUp();
+                    break;
+                }
+                if(isLeftPossible()){
+                    this.moveLeft();
+                    break;
+                }
         }
         
     }
