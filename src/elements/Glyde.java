@@ -20,10 +20,10 @@ import utils.Consts;
  */
 public class Glyde extends Ghost {
     
-    private static final int LEFT = 1;
-    private static final int RIGHT = 2;
-    private static final int UP = 3;
-    private static final int DOWN = 4;
+    private static final int LEFT = 0;
+    private static final int RIGHT = 1;
+    private static final int UP = 2;
+    private static final int DOWN = 3;
     private static final int X = 5;
     private static final int Y = 6;
     

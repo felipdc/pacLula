@@ -12,10 +12,10 @@ import utils.Consts;
 
 public class Inky extends Ghost{
     
-    private static final int LEFT = 1;
-    private static final int RIGHT = 2;
-    private static final int UP = 3;
-    private static final int DOWN = 4;
+    private static final int LEFT = 0;
+    private static final int RIGHT = 1;
+    private static final int UP = 2;
+    private static final int DOWN = 3;
     private static final int X = 5;
     private static final int Y = 6;
     
@@ -198,7 +198,7 @@ public class Inky extends Ghost{
     public void randomMove(){
           
         Random rn = new Random();
-        int randomDirection = rn.nextInt(5);
+        int randomDirection = rn.nextInt(4);
         
         switch(randomDirection){
             case LEFT:
