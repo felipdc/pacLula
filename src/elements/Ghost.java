@@ -40,21 +40,32 @@ public class Ghost extends Element{
         //System.out.println("ys = "+sensYPosition+" y = "+sensYPosition/10);
     }
     
+    public void teleportGhost(){
+        if(pos.getX()==10&&pos.getY()==0){
+            this.setPosition(10, 19);
+        }else{
+            this.setPosition(10,0);
+        }
+    }
+    
     protected boolean isRightPossible(){
         
         if((sensXPosition%10)!=0)
             return false;
         
         //System.out.println(sensXPosition +" "+ sensYPosition);
-        
-        if(stg.wallCords[sensXPosition/10][(sensYPosition+10)/10]!=1){
+        try{
+            if(stg.wallCords[sensXPosition/10][(sensYPosition+10)/10]!=1){
             //System.out.println("Right is now possible in position: ");
             //System.out.println(sensXPosition +" "+ sensYPosition);
+                return true;
+            }else{
+                return false;
+            }
+        }catch(ArrayIndexOutOfBoundsException e){
+            teleportGhost();
             return true;
-        }else{
-            return false;
         }
-        
         //return stg.wallCords[sensXPosition/10][(sensYPosition+10)/10]!=1;
     }
     
@@ -64,13 +75,18 @@ public class Ghost extends Element{
             return false;
                     
         //System.out.println(sensXPosition +" "+ sensYPosition);
-        
-        if(stg.wallCords[sensXPosition/10][(sensYPosition-1)/10]!=1){
+        try{
+            if(stg.wallCords[sensXPosition/10][(sensYPosition-1)/10]!=1){
             //System.out.println("Left is now possible in position: ");
             //System.out.println(sensXPosition +" "+ sensYPosition);
+                return true;
+            }else{
+                return false;
+            }
+            
+        }catch(ArrayIndexOutOfBoundsException e){
+            teleportGhost();
             return true;
-        }else{
-            return false;
         }
 
         //return stg.wallCords[sensXPosition/10][(sensYPosition-10)/10]!=1;
