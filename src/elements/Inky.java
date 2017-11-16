@@ -198,7 +198,7 @@ public class Inky extends Ghost{
     public void randomMove(){
           
         Random rn = new Random();
-        int randomDirection = rn.nextInt(4);
+        int randomDirection = rn.nextInt(5);
         
         switch(randomDirection){
             case LEFT:
