@@ -1,5 +1,6 @@
 package elements;
 
+import control.GameScreen;
 import control.Stage;
 import java.awt.Graphics;
 import utils.Drawing;
@@ -22,6 +23,14 @@ public class Ghost extends Element{
     @Override
     public void autoDraw(Graphics g) {
        Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
+    }
+    
+    public void checkIfLoloIsDead(Lolo llolo, GameScreen gameScreen){
+        
+        if(llolo.overlap(this)){
+            gameScreen.gameOver();
+            gameScreen.dispose();
+        }
     }
     
     public void backToLastPosition(){

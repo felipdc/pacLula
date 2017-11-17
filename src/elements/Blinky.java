@@ -1,5 +1,6 @@
 package elements;
 
+import control.GameScreen;
 import control.Stage;
 import static java.lang.Math.abs;
 import java.util.Random;
@@ -15,20 +16,18 @@ public class Blinky extends Ghost{
     private static final int Y = 6;
     
     private Stage stg = new Stage(1);
+    private GameScreen gameScreen;
     
-    public Blinky(String imageName) {
+    public Blinky(String imageName, GameScreen gameScreen) {
         super(imageName, Consts.ID_GHOST1);
+        this.gameScreen = gameScreen;
     }
-    
-    public boolean checkIfLoloIsDead(Lolo llolo){
-        return llolo.overlap(this);
-    }
+   
 
     public void seekLolo(Lolo llolo){
         
         //Check if blinky got lolo
-        if(checkIfLoloIsDead(llolo))
-            return;
+        checkIfLoloIsDead(llolo, gameScreen);
         
         //Update large ghost position
         updateSensPosition();
@@ -287,4 +286,5 @@ public class Blinky extends Ghost{
             return Y;
         }
     }
+
 }

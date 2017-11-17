@@ -1,6 +1,7 @@
 
 package elements;
 
+import control.GameScreen;
 import control.Stage;
 import static elements.Element.MOVE_DOWN;
 import static elements.Element.MOVE_LEFT;
@@ -20,12 +21,17 @@ public class Inky extends Ghost{
     private static final int Y = 6;
     
     private Stage stg = new Stage(1);
+    private GameScreen gameScreen;
     
-    public Inky(String imageName) {
+    public Inky(String imageName, GameScreen gameScreen) {
         super(imageName, Consts.ID_GHOST3);
+        this.gameScreen = gameScreen;
     }
     
     public void seekLolo(Lolo llolo){
+        
+        //Check if blinky got lolo
+        checkIfLoloIsDead(llolo, gameScreen);
         
         //Update large ghost position
         updateSensPosition();

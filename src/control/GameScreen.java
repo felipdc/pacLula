@@ -19,6 +19,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +48,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     private final Wall[] walls = new Wall[stage.getWallNumber()+1];
     private final Coin[] coins = new Coin[utils.Consts.NUM_CELLS*utils.Consts.NUM_CELLS+1];
     private final Fruit[] fruits = new Fruit[2];
+    GameOverScreen overScreen = new GameOverScreen();
  
 
     public GameScreen() {
@@ -68,22 +70,22 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         this.addElement(lolo);
         
         //adding ghost blinky to stage
-        blinky = new Blinky("blinky.png");
+        blinky = new Blinky("blinky.png", this);
         blinky.setPosition(9,7);
         this.addElement(blinky);
         
         //adding ghost pinky to stage
-        pinky = new Pinky("pinky.png");
+        pinky = new Pinky("pinky.png", this);
         pinky.setPosition(10, 8);
         this.addElement(pinky);
         
         //adding ghost inky to stage      
-        inky = new Inky("inky.png");
+        inky = new Inky("inky.png", this);
         inky.setPosition(10,7);
         this.addElement(inky);
         
         //adding ghost glyde to stage
-        glyde = new Glyde("clyde.png");
+        glyde = new Glyde("clyde.png", this);
         glyde.setPosition(9,8);
         this.addElement(glyde);
         
@@ -243,6 +245,12 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         Timer timeToSpawnBolsa = new Timer();
         timeToSpawnBolsa.schedule(spawnBolsa,Consts.FRUIT2_SPAWN_TIME,Consts.FRUIT2_SPAWN_TIME);
         
+    }
+    
+    public void gameOver(){
+        this.setVisible(false);
+        overScreen.setVisible(true);
+        this.dispose();
     }
     
     @Override

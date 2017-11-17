@@ -5,6 +5,7 @@
  */
 package elements;
 
+import control.GameScreen;
 import control.Stage;
 import static elements.Element.MOVE_DOWN;
 import static elements.Element.MOVE_LEFT;
@@ -27,13 +28,19 @@ public class Glyde extends Ghost {
     private static final int X = 5;
     private static final int Y = 6;
     
-    public Glyde(String imageName) {
+    private GameScreen gameScreen;
+    
+    public Glyde(String imageName, GameScreen gameScreen) {
         super(imageName, Consts.ID_GHOST4);
+        this.gameScreen = gameScreen;
     }
     
     private Stage stg = new Stage(1);
     
     public void seekLolo(Lolo llolo){
+        
+        //Check if blinky got lolo
+        checkIfLoloIsDead(llolo, gameScreen);
         
         //Update large ghost position
         updateSensPosition();

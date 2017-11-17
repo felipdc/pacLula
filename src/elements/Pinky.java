@@ -5,6 +5,7 @@
  */
 package elements;
 
+import control.GameScreen;
 import java.util.Random;
 import utils.Consts;
 
@@ -20,12 +21,18 @@ public class Pinky extends Ghost{
     private static final int DOWN = 3;
     private static final int X = 5;
     private static final int Y = 6;
+    private GameScreen gameScreen;
     
-    public Pinky(String imageName) {
+    
+    public Pinky(String imageName, GameScreen gameScreen) {
         super(imageName, Consts.ID_GHOST2);
+        this.gameScreen = gameScreen;
     }
     
     public void seekLolo(Lolo llolo){
+        
+        //check if lolo is dead
+        checkIfLoloIsDead(llolo, gameScreen);
         
         //Update large ghost position
         updateSensPosition();
