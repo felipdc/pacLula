@@ -48,7 +48,8 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     private final Wall[] walls = new Wall[stage.getWallNumber()+1];
     private final Coin[] coins = new Coin[utils.Consts.NUM_CELLS*utils.Consts.NUM_CELLS+1];
     private final Fruit[] fruits = new Fruit[2];
-    GameOverScreen overScreen = new GameOverScreen();
+    private boolean finishedScreen = false;
+    GameOverScreen overScreen;
  
 
     public GameScreen() {
@@ -248,9 +249,13 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     }
     
     public void gameOver(){
-        this.setVisible(false);
-        overScreen.setVisible(true);
-        this.dispose();
+        if(!finishedScreen){
+            finishedScreen = true;
+            this.setVisible(false);
+            overScreen = new GameOverScreen();
+            overScreen.setVisible(true);
+            this.dispose();
+        }
     }
     
     @Override

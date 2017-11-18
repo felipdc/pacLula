@@ -29,8 +29,8 @@ public class Ghost extends Element{
         
         if(llolo.overlap(this)){
             gameScreen.gameOver();
-            gameScreen.dispose();
         }
+        
     }
     
     public void backToLastPosition(){
