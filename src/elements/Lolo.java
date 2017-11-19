@@ -15,6 +15,7 @@ public class Lolo extends Element  implements Serializable{
 
     private int movDirection = STOP;
     private int desireDirection = STOP;
+    private int lifes = 3;
     private Stage stg = new Stage(1);
     
     public Lolo(String imageName) {
@@ -24,6 +25,18 @@ public class Lolo extends Element  implements Serializable{
     @Override
     public void autoDraw(Graphics g){
         Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
+    }
+    
+    public int getLifes(){
+        return lifes;
+    }
+    
+    public void increaseLifes(){
+        lifes++;
+    }
+    
+    public void decreaseLifes(){
+        lifes--;
     }
 
     public void backToLastPosition(){

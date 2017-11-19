@@ -28,7 +28,12 @@ public class Ghost extends Element{
     public void checkIfLoloIsDead(Lolo llolo, GameScreen gameScreen){
         
         if(llolo.overlap(this)){
-            gameScreen.gameOver();
+            if(llolo.getLifes()==0){
+                gameScreen.gameOver();
+            }
+            if(llolo.getLifes()!=0){
+                gameScreen.loloCaught();
+            }
         }
         
     }

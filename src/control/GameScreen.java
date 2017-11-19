@@ -49,6 +49,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     private final Coin[] coins = new Coin[utils.Consts.NUM_CELLS*utils.Consts.NUM_CELLS+1];
     private final Fruit[] fruits = new Fruit[2];
     private boolean finishedScreen = false;
+    private int lifes = 3;
     GameOverScreen overScreen;
  
 
@@ -146,7 +147,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore() + "pinky -> " + pinky.getGhostPosition());;
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore() + "Lifes -> " + lolo.getLifes());
         
         g.dispose();
         g2.dispose();
@@ -256,6 +257,19 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             overScreen.setVisible(true);
             this.dispose();
         }
+    }
+    
+    public void loloCaught(){
+        
+        lolo.decreaseLifes();
+        
+        lolo.setPosition(1, 1);
+        blinky.setPosition(10, 7);
+        pinky.setPosition(10,8);
+        inky.setPosition(9,7);
+        glyde.setPosition(9, 8);
+        
+        
     }
     
     @Override
