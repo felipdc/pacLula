@@ -28,6 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  * Projeto de POO 2017
@@ -57,6 +58,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         
         Drawing.setGameScreen(this);
         initComponents();
+        setFrameIconImage();
         
         this.addKeyListener(this);   /*teclado*/
         
@@ -247,6 +249,17 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         Timer timeToSpawnBolsa = new Timer();
         timeToSpawnBolsa.schedule(spawnBolsa,Consts.FRUIT2_SPAWN_TIME,Consts.FRUIT2_SPAWN_TIME);
         
+    }
+    
+    private void setFrameIconImage(){
+        try{
+            ImageIcon img = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + "lula.png");
+            this.setIconImage(img.getImage());
+        }catch(IOException ex){
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
     }
     
     public void gameOver(){

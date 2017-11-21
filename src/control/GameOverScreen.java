@@ -5,6 +5,12 @@
  */
 package control;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import utils.Consts;
+
 /**
  *
  * @author metalgas
@@ -16,6 +22,8 @@ public class GameOverScreen extends javax.swing.JFrame {
      */
     public GameOverScreen() {
         initComponents();
+        setFrameIconImage();
+        
     }
 
     /**
@@ -110,6 +118,17 @@ public class GameOverScreen extends javax.swing.JFrame {
                 new GameOverScreen().setVisible(true);
             }
         });
+    }
+    
+    private void setFrameIconImage(){
+        try{
+            ImageIcon img = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + "lula.png");
+            this.setIconImage(img.getImage());
+        }catch(IOException ex){
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

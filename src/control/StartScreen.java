@@ -24,6 +24,7 @@ public class StartScreen extends javax.swing.JFrame {
     public StartScreen() {
         initComponents();
         paintButtons();
+        setFrameIconImage();
         
     }
 
@@ -253,6 +254,17 @@ public class StartScreen extends javax.swing.JFrame {
             Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+    
+    private void setFrameIconImage(){
+        try{
+            ImageIcon img = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + "lula.png");
+            this.setIconImage(img.getImage());
+        }catch(IOException ex){
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
     }
     
 
