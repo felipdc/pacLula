@@ -28,8 +28,8 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Felipe\Desktop\pacLula\imgs\iniciarButton.png"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(getIniciarButtonImage())" type="code"/>
         </Property>
       </Properties>
       <Events>
@@ -45,8 +45,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Felipe\Desktop\pacLula\imgs\carregarButton.png"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(getCarregarButtonImage())" type="code"/>
         </Property>
       </Properties>
       <Events>
@@ -61,8 +61,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Felipe\Desktop\pacLula\imgs\sairButton.png"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(getSairButtonImage())" type="code"/>
         </Property>
       </Properties>
       <Events>
@@ -78,8 +78,8 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Felipe\Desktop\pacLula\imgs\bgStartScreen.png"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new javax.swing.ImageIcon(getBgImage())" type="code"/>
         </Property>
       </Properties>
       <Constraints>

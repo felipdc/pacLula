@@ -45,7 +45,7 @@ public class StartScreen extends javax.swing.JFrame {
         setTitle("P.A.C Lula");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Felipe\\Desktop\\pacLula\\imgs\\iniciarButton.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getIniciarButtonImage()));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton2MousePressed(evt);
@@ -61,7 +61,7 @@ public class StartScreen extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 310, 90));
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Felipe\\Desktop\\pacLula\\imgs\\carregarButton.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getCarregarButtonImage()));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
@@ -72,7 +72,7 @@ public class StartScreen extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 310, 100));
 
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Felipe\\Desktop\\pacLula\\imgs\\sairButton.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getSairButtonImage()));
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
@@ -86,7 +86,7 @@ public class StartScreen extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 320, 310, 100));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Felipe\\Desktop\\pacLula\\imgs\\bgStartScreen.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getBgImage()));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 540));
 
         pack();
@@ -217,6 +217,42 @@ public class StartScreen extends javax.swing.JFrame {
     private void drawFrameIcon(){
         ImageIcon img = new ImageIcon();
         this.setIconImage(img.getImage());
+    }
+    
+    private String getIniciarButtonImage(){
+        try {
+            return new java.io.File(".").getCanonicalPath() + Consts.PATH + "iniciarButton.png";
+        } catch (IOException ex) {
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    private String getCarregarButtonImage(){
+        try {
+            return new java.io.File(".").getCanonicalPath() + Consts.PATH + "carregarButton.png";
+        } catch (IOException ex) {
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    private String getSairButtonImage(){
+        try {
+            return new java.io.File(".").getCanonicalPath() + Consts.PATH + "sairButton.png";
+        } catch (IOException ex) {
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    private String getBgImage(){
+        try {
+            return new java.io.File(".").getCanonicalPath() + Consts.PATH + "bgStartScreen.png";
+        } catch (IOException ex) {
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
     
 
