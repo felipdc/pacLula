@@ -42,7 +42,7 @@ public class GameController {
             if(lLolo.overlap(eTemp)){
                 if(eTemp.isTransposable()){
                     e.remove(eTemp);
-                    //check which element was eat
+                    //check which element was eaten
                     if(eTemp.getElementId()==Consts.ID_COIN){
                         score=score+Consts.COIN_POINT;
                     }
@@ -51,7 +51,11 @@ public class GameController {
                     }
                     if(eTemp.getElementId()==Consts.ID_FRUIT2){
                         score=score+Consts.FRUIT2_POINT;
-                    }                                     
+                    }
+                    if(eTemp.getElementId()==Consts.ID_PELLET){
+                        score=score+Consts.PELLET_POINT;
+                        lLolo.setPelletPowered();
+                    }
                 }
             }
         }       

@@ -2,8 +2,13 @@ package elements;
 
 import control.GameScreen;
 import control.Stage;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import static java.lang.Math.abs;
 import java.util.Random;
+import javax.swing.ImageIcon;
 import utils.Consts;
 
 public class Blinky extends Ghost{
@@ -15,6 +20,8 @@ public class Blinky extends Ghost{
     private static final int X = 5;
     private static final int Y = 6;
     
+    private boolean blinkyJump = false;
+    
     private Stage stg = new Stage(1);
     private GameScreen gameScreen;
     
@@ -22,9 +29,32 @@ public class Blinky extends Ghost{
         super(imageName, Consts.ID_GHOST1);
         this.gameScreen = gameScreen;
     }
+    
+  
    
 
     public void seekLolo(Lolo llolo){
+        
+        //Check if lolo is powered
+        
+        if(llolo.getPelletPowered()){
+            paintGhost("scaredGhost.png");
+            setJump(true);
+        }else{
+            paintGhost("blinky.png");
+            setJump(false);
+        }
+        
+        if(jumpMove()){
+            if(blinkyJump){
+                blinkyJump=!blinkyJump;
+                return;
+            }
+            blinkyJump=!blinkyJump;
+        }
+        
+        //use this boolean to reduce ghost speed
+        
         
         //Check if blinky got lolo
         checkIfLoloIsDead(llolo, gameScreen);

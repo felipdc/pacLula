@@ -11,6 +11,7 @@ import elements.Fruit;
 import elements.Glyde;
 import elements.Inky;
 import elements.Pinky;
+import elements.PowerPellet;
 import java.awt.Dimension;
 import utils.Consts;
 import utils.Drawing;
@@ -49,6 +50,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     private final Wall[] walls = new Wall[stage.getWallNumber()+1];
     private final Coin[] coins = new Coin[utils.Consts.NUM_CELLS*utils.Consts.NUM_CELLS+1];
     private final Fruit[] fruits = new Fruit[2];
+    private final PowerPellet[] pellets = new PowerPellet[4];
     private boolean finishedScreen = false;
     private int lifes = 3;
     GameOverScreen overScreen;
@@ -69,6 +71,8 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         elemArray = new ArrayList<Element>();
 
         /*Cria e adiciona elementos*/
+        
+        //adding lolo to stage
         lolo = new Lolo("lula.png");
         lolo.setPosition(1, 1);
         this.addElement(lolo);
@@ -93,13 +97,15 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         glyde.setPosition(9,8);
         this.addElement(glyde);
         
+        
         //start fruit counter
         fruitSpawn();
         
         int k=0;
         int z=0;
+        int p=0;
         
-        //adding walls and coins to stage        
+        //adding walls,coins and power-pellets to stage        
         for(int i=0;i<Consts.NUM_CELLS;i++){
             for(int j=0;j<Consts.NUM_CELLS;j++){
                     
@@ -115,6 +121,13 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
                     this.addElement(coins[z]);
                     z++;
                 }
+                
+                if(stage.wallCords[i][j]==3){
+                    pellets[p]=new PowerPellet("lula_2018.jpg");
+                    pellets[p].setPosition(i,j);
+                    this.addElement(pellets[p]);
+                    p++;
+                }            
             } 
         }
     }
@@ -149,7 +162,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore() + "-> Lifes: " + lolo.getLifes());
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore() + "-> Lifes: " + lolo.getLifes() + lolo.getPelletPowered());
         
         g.dispose();
         g2.dispose();

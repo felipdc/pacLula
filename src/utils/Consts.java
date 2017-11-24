@@ -24,6 +24,7 @@ public class Consts {
     public static final int COIN_POINT = 10;
     public static final int FRUIT1_POINT = 100;
     public static final int FRUIT2_POINT = 500;
+    public static final int PELLET_POINT = 50;
     
     public static final int FRUIT1_SPAWN_TIME = 61000;
     public static final int FRUIT2_SPAWN_TIME = 75100;
@@ -37,5 +38,6 @@ public class Consts {
     public static final int ID_GHOST2 = 1006;
     public static final int ID_GHOST3 = 1007;
     public static final int ID_GHOST4 = 1008;
+    public static final int ID_PELLET = 1009;
             
 }

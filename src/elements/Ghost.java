@@ -3,15 +3,26 @@ package elements;
 import control.GameScreen;
 import control.Stage;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.swing.ImageIcon;
+import utils.Consts;
 import utils.Drawing;
 
 public class Ghost extends Element{
     
+    private static final int RIGHT_OP = MOVE_LEFT;
+    private static final int LEFT_OP = MOVE_RIGHT;
+    private static final int UP_OP = MOVE_DOWN;
+    private static final int DOWN_OP = MOVE_UP;
     
     private int movDirection = STOP;
     private Stage stg = new Stage(1);
     private int sensXPosition;
     private int sensYPosition;
+    
+    private boolean jump = false;
     
     public Ghost(String imageName, int ghostType) {
         super(imageName);
@@ -36,6 +47,18 @@ public class Ghost extends Element{
             }
         }
         
+    }
+    
+    public boolean jumpMove(){
+        return jump;
+    }
+    
+    public void setJump(boolean opt){
+        jump = opt;
+    }
+    
+    public boolean isLoloPowered(Lolo llolo){
+        return llolo.getPelletPowered();
     }
     
     public void backToLastPosition(){
@@ -218,6 +241,20 @@ public class Ghost extends Element{
                 break;
             default:
                 break;
+        }
+    }
+    
+    public void paintGhost(String imageName){
+         try {
+            imageIcon = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName);
+            Image img = imageIcon.getImage();
+            BufferedImage bi = new BufferedImage(Consts.CELL_SIZE, Consts.CELL_SIZE, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bi.createGraphics();
+            g.drawImage(img, 0, 0, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
+            imageIcon = new ImageIcon(bi);
+            
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
     

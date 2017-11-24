@@ -4,6 +4,9 @@ import control.Stage;
 import utils.Drawing;
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
+import utils.Consts;
 
 /**
  * Projeto de POO 2017
@@ -16,6 +19,7 @@ public class Lolo extends Element  implements Serializable{
     private int movDirection = STOP;
     private int desireDirection = STOP;
     private int lifes = 3;
+    private boolean pelletPowered;
     private Stage stg = new Stage(1);
     
     public Lolo(String imageName) {
@@ -29,6 +33,25 @@ public class Lolo extends Element  implements Serializable{
     
     public int getLifes(){
         return lifes;
+    }
+    
+    public void setPelletPowered(){
+        
+        pelletPowered = true;
+        TimerTask task = new TimerTask() {
+            
+            public void run() {
+                pelletPowered=false;
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, 7000);
+       
+    }
+        
+    
+    public boolean getPelletPowered(){
+        return pelletPowered;
     }
     
     public void increaseLifes(){

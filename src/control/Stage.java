@@ -135,6 +135,12 @@ public class Stage{
                     
                 }
                 wallCords[8][9]=2;
+                
+                //power pellets position
+                wallCords[18][1] = 3;
+                wallCords[18][11] = 3;
+                wallCords[1][9] = 3;
+                wallCords[1][18] = 3;
     }
     
     

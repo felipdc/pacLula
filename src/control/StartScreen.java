@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import utils.Consts;
 
 /**
@@ -129,6 +130,8 @@ public class StartScreen extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JOptionPane.showMessageDialog(rootPane, "Not implemented yet","Warning",2);
+        
     }//GEN-LAST:event_jButton1MouseReleased
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
