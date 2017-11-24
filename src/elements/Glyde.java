@@ -28,6 +28,8 @@ public class Glyde extends Ghost {
     private static final int X = 5;
     private static final int Y = 6;
     
+    private boolean clydeJump = false;
+    
     private GameScreen gameScreen;
     
     public Glyde(String imageName, GameScreen gameScreen) {
@@ -38,6 +40,24 @@ public class Glyde extends Ghost {
     private Stage stg = new Stage(1);
     
     public void seekLolo(Lolo llolo){
+        
+        if(llolo.getPelletPowered()){
+            if(!"scaredGhost.png".equals(getGhostImage()))
+                paintGhost("scaredGhost.png");
+            setJump(true);
+        }else{
+            if(!"clyde.png".equals(getGhostImage()))
+                paintGhost("clyde.png");
+            setJump(false);
+        }
+        
+        if(jumpMove()){
+            if(clydeJump){
+                clydeJump=!clydeJump;
+                return;
+            }
+            clydeJump=!clydeJump;
+        }
         
         //Check if blinky got lolo
         checkIfLoloIsDead(llolo, gameScreen);

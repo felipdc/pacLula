@@ -21,6 +21,8 @@ public class Inky extends Ghost{
     private static final int Y = 6;
     
     private Stage stg = new Stage(1);
+    
+    private boolean inkyJump = false;
     private GameScreen gameScreen;
     
     public Inky(String imageName, GameScreen gameScreen) {
@@ -29,6 +31,24 @@ public class Inky extends Ghost{
     }
     
     public void seekLolo(Lolo llolo){
+        
+        if(llolo.getPelletPowered()){
+            if(!"scaredGhost.png".equals(getGhostImage()))
+                paintGhost("scaredGhost.png");
+            setJump(true);
+        }else{
+            if(!"inky.png".equals(getGhostImage()))
+                paintGhost("inky.png");
+            setJump(false);
+        }
+        
+        if(jumpMove()){
+            if(inkyJump){
+                inkyJump=!inkyJump;
+                return;
+            }
+            inkyJump=!inkyJump;
+        }
         
         //Check if blinky got lolo
         checkIfLoloIsDead(llolo, gameScreen);

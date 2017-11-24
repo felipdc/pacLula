@@ -38,10 +38,12 @@ public class Blinky extends Ghost{
         //Check if lolo is powered
         
         if(llolo.getPelletPowered()){
-            paintGhost("scaredGhost.png");
+            if(!"scaredGhost.png".equals(getGhostImage()))
+                paintGhost("scaredGhost.png");
             setJump(true);
         }else{
-            paintGhost("blinky.png");
+            if(!"blinky.png".equals(getGhostImage()))
+                paintGhost("blinky.png");
             setJump(false);
         }
         

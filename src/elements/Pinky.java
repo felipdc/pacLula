@@ -22,6 +22,7 @@ public class Pinky extends Ghost{
     private static final int X = 5;
     private static final int Y = 6;
     private GameScreen gameScreen;
+    private boolean pinkyJump = false;
     
     
     public Pinky(String imageName, GameScreen gameScreen) {
@@ -30,6 +31,25 @@ public class Pinky extends Ghost{
     }
     
     public void seekLolo(Lolo llolo){
+        
+        if(llolo.getPelletPowered()){
+            if(!"scaredGhost.png".equals(getGhostImage()))
+                paintGhost("scaredGhost.png");
+            setJump(true);
+        }else{
+            if(!"pinky.png".equals(getGhostImage()))
+                paintGhost("pinky.png");
+            setJump(false);
+        }
+        
+        if(jumpMove()){
+            if(pinkyJump){
+                pinkyJump=!pinkyJump;
+                return;
+            }
+            pinkyJump=!pinkyJump;
+        }
+        
         
         //check if lolo is dead
         checkIfLoloIsDead(llolo, gameScreen);

@@ -21,6 +21,7 @@ public class Ghost extends Element{
     private Stage stg = new Stage(1);
     private int sensXPosition;
     private int sensYPosition;
+    private String ghostImage;
     
     private boolean jump = false;
     
@@ -246,6 +247,7 @@ public class Ghost extends Element{
     
     public void paintGhost(String imageName){
          try {
+            ghostImage=imageName;
             imageIcon = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName);
             Image img = imageIcon.getImage();
             BufferedImage bi = new BufferedImage(Consts.CELL_SIZE, Consts.CELL_SIZE, BufferedImage.TYPE_INT_ARGB);
@@ -256,6 +258,10 @@ public class Ghost extends Element{
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+    
+    public String getGhostImage(){
+        return ghostImage;
     }
     
 }
