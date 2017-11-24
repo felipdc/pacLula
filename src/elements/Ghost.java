@@ -12,17 +12,14 @@ import utils.Drawing;
 
 public class Ghost extends Element{
     
-    private static final int RIGHT_OP = MOVE_LEFT;
-    private static final int LEFT_OP = MOVE_RIGHT;
-    private static final int UP_OP = MOVE_DOWN;
-    private static final int DOWN_OP = MOVE_UP;
-    
+    public static final int LOLO_DEAD = 1;
+    public static final int GHOST_DEAD = 2;
     private int movDirection = STOP;
     private Stage stg = new Stage(1);
     private int sensXPosition;
     private int sensYPosition;
     private String ghostImage;
-    
+    private boolean scared = false;
     private boolean jump = false;
     
     public Ghost(String imageName, int ghostType) {
@@ -37,16 +34,22 @@ public class Ghost extends Element{
        Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
     }
     
-    public void checkIfLoloIsDead(Lolo llolo, GameScreen gameScreen){
+    public int checkIfLoloIsDead(Lolo llolo, GameScreen gameScreen){
         
         if(llolo.overlap(this)){
-            if(llolo.getLifes()==0){
-                gameScreen.gameOver();
-            }
-            if(llolo.getLifes()!=0){
-                gameScreen.loloCaught();
+            if(!scared){
+                if(llolo.getLifes()==0){
+                    gameScreen.gameOver();
+                }
+                if(llolo.getLifes()!=0){
+                    gameScreen.loloCaught();
+                }
+                return LOLO_DEAD;
+            }else{
+                return GHOST_DEAD;
             }
         }
+        return 0;
         
     }
     
@@ -262,6 +265,18 @@ public class Ghost extends Element{
     
     public String getGhostImage(){
         return ghostImage;
+    }
+    
+    public boolean isScared(){
+        return scared;
+    }
+    
+    public void setScaredOn(){
+        scared=true;
+    }
+    
+    public void setScaredOff(){
+        scared=false;
     }
     
 }

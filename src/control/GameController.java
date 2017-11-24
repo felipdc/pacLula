@@ -16,8 +16,6 @@ import utils.Consts;
 
 public class GameController {
     
-    private int score=0;
-    
     public void drawAllElements(ArrayList<Element> elemArray, Graphics g){
         for(int i=0; i<elemArray.size(); i++){
             elemArray.get(i).autoDraw(g);
@@ -44,16 +42,16 @@ public class GameController {
                     e.remove(eTemp);
                     //check which element was eaten
                     if(eTemp.getElementId()==Consts.ID_COIN){
-                        score=score+Consts.COIN_POINT;
+                        lLolo.increaseScore(Consts.COIN_POINT);
                     }
                     if(eTemp.getElementId()==Consts.ID_FRUIT1){
-                        score=score+Consts.FRUIT1_POINT;
+                        lLolo.increaseScore(Consts.FRUIT1_POINT);
                     }
                     if(eTemp.getElementId()==Consts.ID_FRUIT2){
-                        score=score+Consts.FRUIT2_POINT;
+                        lLolo.increaseScore(Consts.FRUIT2_POINT);
                     }
                     if(eTemp.getElementId()==Consts.ID_PELLET){
-                        score=score+Consts.PELLET_POINT;
+                        lLolo.increaseScore(Consts.PELLET_POINT);
                         lLolo.setPelletPowered();
                     }
                 }
@@ -70,9 +68,5 @@ public class GameController {
                     return false;
         }        
         return true;
-    }
-    
-    public int getScore(){
-        return score;
     }
 }

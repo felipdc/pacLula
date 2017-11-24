@@ -52,7 +52,9 @@ public class Pinky extends Ghost{
         
         
         //check if lolo is dead
-        checkIfLoloIsDead(llolo, gameScreen);
+        if(checkIfLoloIsDead(llolo, gameScreen)==GHOST_DEAD){
+            this.setPosition(10, 8);
+        }
         
         //Update large ghost position
         updateSensPosition();

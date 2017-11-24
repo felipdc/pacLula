@@ -19,6 +19,7 @@ public class Lolo extends Element  implements Serializable{
     private int movDirection = STOP;
     private int desireDirection = STOP;
     private int lifes = 3;
+    private int score = 0;
     private boolean pelletPowered;
     private Stage stg = new Stage(1);
     
@@ -33,6 +34,14 @@ public class Lolo extends Element  implements Serializable{
     
     public int getLifes(){
         return lifes;
+    }
+    
+    public int getScore(){
+        return score;
+    }
+    
+    public void increaseScore(int score){
+        this.score = this.score + score;
     }
     
     public void setPelletPowered(){

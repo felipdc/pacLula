@@ -162,7 +162,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ controller.getScore() + "-> Lifes: " + lolo.getLifes() + lolo.getPelletPowered());
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ lolo.getScore() + "-> Lifes: " + lolo.getLifes() + lolo.getPelletPowered());
         
         g.dispose();
         g2.dispose();

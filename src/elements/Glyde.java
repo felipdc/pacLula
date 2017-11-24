@@ -42,10 +42,12 @@ public class Glyde extends Ghost {
     public void seekLolo(Lolo llolo){
         
         if(llolo.getPelletPowered()){
+            setScaredOn();
             if(!"scaredGhost.png".equals(getGhostImage()))
                 paintGhost("scaredGhost.png");
             setJump(true);
         }else{
+            setScaredOff();
             if(!"clyde.png".equals(getGhostImage()))
                 paintGhost("clyde.png");
             setJump(false);
@@ -60,7 +62,9 @@ public class Glyde extends Ghost {
         }
         
         //Check if blinky got lolo
-        checkIfLoloIsDead(llolo, gameScreen);
+        if(checkIfLoloIsDead(llolo, gameScreen)==GHOST_DEAD){
+            this.setPosition(10, 8);
+        }
         
         //Update large ghost position
         updateSensPosition();
@@ -313,18 +317,36 @@ public class Glyde extends Ghost {
     
     public int xPriority(double xDist){
         if(xDist<0){
-                return RIGHT;               
+            if(!isScared()){
+                return RIGHT;
             }else{
                 return LEFT;
             }
+                
+        }else{
+            if(!isScared()){
+                return LEFT;
+            }else{
+                return RIGHT;
+            }
+        }
     }
     
     public int yPriority(double yDist){
         if(yDist>0){
-                return UP;               
+            if(!isScared()){
+                return UP;
             }else{
                 return DOWN;
+            }    
+              
+        }else{
+            if(!isScared()){
+                return DOWN;
+            }else{
+                return UP;
             }
+        }
     }
     
     public int axisPriority(double yDist,double xDist){
