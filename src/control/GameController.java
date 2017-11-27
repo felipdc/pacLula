@@ -54,6 +54,15 @@ public class GameController {
                         lLolo.increaseScore(Consts.PELLET_POINT);
                         lLolo.setPelletPowered();
                     }
+                    
+                    //checa se o pacman tem 10000 pontos para ganhar uma vida
+                    
+                    if(lLolo.getScore()>=10000){
+                        lLolo.increaseLifes();
+                        lLolo.decreaseScore(lLolo.getScore()-10000);
+                        
+                    }
+                    
                 }
             }
         }       

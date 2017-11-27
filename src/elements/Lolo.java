@@ -44,6 +44,11 @@ public class Lolo extends Element  implements Serializable{
         this.score = this.score + score;
     }
     
+    public void decreaseScore(int score){
+        this.score = this.score - score;
+    }
+    
+    
     public void setPelletPowered(){
         
         pelletPowered = true;
