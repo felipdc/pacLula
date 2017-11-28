@@ -2,7 +2,6 @@ package control;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import elements.Blinky;
-import elements.Skull;
 import elements.Lolo;
 import elements.Element;
 import elements.Wall;
@@ -39,18 +38,9 @@ import javax.swing.ImageIcon;
  */
 public final class GameScreen extends javax.swing.JFrame implements KeyListener {
     
-    private final Lolo lolo;
-    private final Blinky blinky;
-    private final Pinky pinky;
-    private final Inky inky;
-    private final Glyde glyde;
-    private final ArrayList<Element> elemArray;
-    private final GameController controller = new GameController();
-    private final Stage stage = new Stage(1);
-    private final Wall[] walls = new Wall[stage.getWallNumber()+1];
-    private final Coin[] coins = new Coin[utils.Consts.NUM_CELLS*utils.Consts.NUM_CELLS+1];
-    private final Fruit[] fruits = new Fruit[2];
-    private final PowerPellet[] pellets = new PowerPellet[4];
+  
+    private final GameController controller = new GameController();  
+    private final BackgroundElement bgElement;
     private boolean finishedScreen = false;
     private int lifes = 3;
     GameOverScreen overScreen;
@@ -67,77 +57,9 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
         this.setSize(Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().left + getInsets().right,
                      Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().top + getInsets().bottom);
+        
+        bgElement = new BackgroundElement(this);
 
-        elemArray = new ArrayList<Element>();
-
-        /*Cria e adiciona elementos*/
-        
-        //adding lolo to stage
-        lolo = new Lolo("lula.png");
-        lolo.setPosition(1, 1);
-        this.addElement(lolo);
-        
-        //adding ghost blinky to stage
-        blinky = new Blinky("blinky.png", this);
-        blinky.setPosition(9,7);
-        this.addElement(blinky);
-        
-        //adding ghost pinky to stage
-        pinky = new Pinky("pinky.png", this);
-        pinky.setPosition(10, 8);
-        this.addElement(pinky);
-        
-        //adding ghost inky to stage      
-        inky = new Inky("inky.png", this);
-        inky.setPosition(10,7);
-        this.addElement(inky);
-        
-        //adding ghost glyde to stage
-        glyde = new Glyde("clyde.png", this);
-        glyde.setPosition(9,8);
-        this.addElement(glyde);
-        
-        
-        //start fruit counter
-        fruitSpawn();
-        
-        int k=0;
-        int z=0;
-        int p=0;
-        
-        //adding walls,coins and power-pellets to stage        
-        for(int i=0;i<Consts.NUM_CELLS;i++){
-            for(int j=0;j<Consts.NUM_CELLS;j++){
-                    
-                if(stage.wallCords[i][j]==1){                
-                    walls[k]=new Wall("wall1.png");
-                    walls[k].setPosition(i,j);
-                    this.addElement(walls[k]);
-                    k++;  
-                }
-                if(stage.wallCords[i][j]==0){
-                    coins[z]=new Coin("money1.png");
-                    coins[z].setPosition(i,j);
-                    this.addElement(coins[z]);
-                    z++;
-                }
-                
-                if(stage.wallCords[i][j]==3){
-                    pellets[p]=new PowerPellet("lula_2018.jpg");
-                    pellets[p].setPosition(i,j);
-                    this.addElement(pellets[p]);
-                    p++;
-                }            
-            } 
-        }
-    }
-    
-    public final void addElement(Element elem) {
-        elemArray.add(elem);
-    }
-    
-    public void removeElement(Element elem) {
-        elemArray.remove(elem);
     }
     
     @Override
@@ -160,9 +82,9 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             }
         }
 
-        this.controller.drawAllElements(elemArray, g2);
-        this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "-> Score: R$"+ lolo.getScore() + "-> Lifes: " + lolo.getLifes() + lolo.getPelletPowered());
+        this.controller.drawAllElements(bgElement.elemArray, g2);
+        this.controller.processAllElements(bgElement.elemArray);
+        this.setTitle("-> Cell: " + bgElement.lolo.getStringPosition() + "-> Score: R$"+ bgElement.lolo.getScore() + "-> Lifes: " + bgElement.lolo.getLifes() + bgElement.lolo.getPelletPowered());
         
         g.dispose();
         g2.dispose();
@@ -178,91 +100,16 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             public void run() {
                 repaint();
                 //start ghost search for lolo
-                blinky.seekLolo(lolo);
-                pinky.seekLolo(lolo);
-                inky.seekLolo(lolo);
-                glyde.seekLolo(lolo);
+                bgElement.blinky.seekLolo(bgElement.lolo);
+                bgElement.pinky.seekLolo(bgElement.lolo);
+                bgElement.inky.seekLolo(bgElement.lolo);
+                bgElement.glyde.seekLolo(bgElement.lolo);
             }
         };
         Timer timer = new Timer();
         timer.schedule(task, 0, Consts.DELAY);
     }
-    
-    public void fruitSpawn(){
-        
-        //create random int object
-        Random rn = new Random();
-        int randomPosition[] = new int[2];
-        
-        //create fruit object of type 1
-        Fruit f1 = new Fruit("fruit_cut.png",Consts.ID_FRUIT1);
-        //create fruit object of type 2
-        Fruit f2 = new Fruit("fruit_bolsa_familia.png",Consts.ID_FRUIT2);
-       
-        TimerTask spawnCut = new TimerTask(){
-            public void run(){
-                LOGGER.log(Level.INFO,"Adding f1");
-                
-                do{
-                    //set a random position for the fruit
-                    randomPosition[0] = rn.nextInt(Consts.NUM_CELLS-1);
-                    randomPosition[1] = rn.nextInt(Consts.NUM_CELLS-1);
-                }
-                //check if the position generated is valid for the fruit
-                while(stage.wallCords[randomPosition[0]][randomPosition[1]]!=0);
-                
-                f1.setPosition(randomPosition[0],randomPosition[1]);
-                addElement(f1);                 
-            }
-        };
-        
-        TimerTask removeCut = new TimerTask(){
-            public void run(){
-                if(elemArray.contains(f1)){
-                    LOGGER.log(Level.INFO,"Removing f1");
-                    removeElement(f1);                            
-                }
-            }
-        };
-        
-        TimerTask spawnBolsa = new TimerTask(){
-            public void run(){
-                LOGGER.log(Level.INFO,"Adding f2");
-                 do{
-                    //set a random position for the fruit
-                    randomPosition[0] = rn.nextInt(Consts.NUM_CELLS-1);
-                    randomPosition[1] = rn.nextInt(Consts.NUM_CELLS-1);
-                }
-                //check if the position generated is valid for the fruit
-                while(stage.wallCords[randomPosition[0]][randomPosition[1]]!=0);
-                
-                f2.setPosition(randomPosition[0],randomPosition[1]);
-                addElement(f2);
-            }
-        };
-        
-        TimerTask removeBolsa = new TimerTask(){
-            public void run(){
-                if(elemArray.contains(f2)){
-                    LOGGER.log(Level.INFO,"Removing f2");
-                    removeElement(f2);                            
-                }
-            }
-        };
-                
-        Timer timeToRemoveCut = new Timer();
-        timeToRemoveCut.schedule(removeCut,Consts.FRUIT1_SPAWN_TIME-100, Consts.FRUIT_DESTROY_TIME);
-        
-        Timer timeToRemoveBolsa = new Timer();
-        timeToRemoveBolsa.schedule(removeBolsa, Consts.FRUIT2_SPAWN_TIME-100,Consts.FRUIT_DESTROY_TIME);
-        
-        Timer timeToSpawnCut = new Timer();
-        timeToSpawnCut.schedule(spawnCut,Consts.FRUIT1_SPAWN_TIME, Consts.FRUIT1_SPAWN_TIME);
-        
-        Timer timeToSpawnBolsa = new Timer();
-        timeToSpawnBolsa.schedule(spawnBolsa,Consts.FRUIT2_SPAWN_TIME,Consts.FRUIT2_SPAWN_TIME);
-        
-    }
+
     
     private void setFrameIconImage(){
         try{
@@ -287,13 +134,13 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     
     public void loloCaught(){
         
-        lolo.decreaseLifes();
+        bgElement.lolo.decreaseLifes();
         
-        lolo.setPosition(1, 1);
-        blinky.setPosition(10, 7);
-        pinky.setPosition(10,8);
-        inky.setPosition(9,7);
-        glyde.setPosition(9, 8);
+        bgElement.lolo.setPosition(1, 1);
+        bgElement.blinky.setPosition(10, 7);
+        bgElement.pinky.setPosition(10,8);
+        bgElement.inky.setPosition(9,7);
+        bgElement.glyde.setPosition(9, 8);
         
         
     }
@@ -302,20 +149,20 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                lolo.setDesireDirection(Lolo.MOVE_UP);
+                bgElement.lolo.setDesireDirection(Lolo.MOVE_UP);
                 break;
         //repaint(); /*invoca o paint imediatamente, sem aguardar o refresh*/
             case KeyEvent.VK_DOWN:
-                lolo.setDesireDirection(Lolo.MOVE_DOWN);
+                bgElement.lolo.setDesireDirection(Lolo.MOVE_DOWN);
                 break;
             case KeyEvent.VK_LEFT:
-                lolo.setDesireDirection(Lolo.MOVE_LEFT);
+                bgElement.lolo.setDesireDirection(Lolo.MOVE_LEFT);
                 break;
             case KeyEvent.VK_RIGHT:
-                lolo.setDesireDirection(Lolo.MOVE_RIGHT);
+                bgElement.lolo.setDesireDirection(Lolo.MOVE_RIGHT);
                 break;
             case KeyEvent.VK_SPACE:
-                lolo.setDesireDirection(Lolo.STOP);
+                bgElement.lolo.setDesireDirection(Lolo.STOP);
                 break;
             default:
                 break;
