@@ -33,6 +33,10 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
     private final GameController controller = new GameController();  
     private final BackgroundElement bgElement;
     private GameOverScreen overScreen;
+    
+    public static final int PAUSE = 1;
+    public static final int UNPAUSE = 0;
+    private int state = UNPAUSE;
  
 
     public GameScreen(BackgroundElement bg) {
@@ -104,12 +108,14 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         TimerTask task = new TimerTask() {
             
             public void run() {
-                repaint();
-                //start ghost search for lolo
-                bgElement.blinky.seekLolo(bgElement.lolo);
-                bgElement.pinky.seekLolo(bgElement.lolo);
-                bgElement.inky.seekLolo(bgElement.lolo);
-                bgElement.glyde.seekLolo(bgElement.lolo);
+                if(state!=PAUSE){
+                    repaint();
+                    //start ghost search for lolo
+                    bgElement.blinky.seekLolo(bgElement.lolo);
+                    bgElement.pinky.seekLolo(bgElement.lolo);
+                    bgElement.inky.seekLolo(bgElement.lolo);
+                    bgElement.glyde.seekLolo(bgElement.lolo);
+                }
             }
         };
         Timer timer = new Timer();
@@ -149,6 +155,13 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
             case KeyEvent.VK_SPACE:
                 bgElement.saveGame();
                 break;
+            case KeyEvent.VK_P:
+                if(state==UNPAUSE){
+                    System.out.println("pausing game....");
+                    state=PAUSE;
+                }else{
+                    state=UNPAUSE;
+                }
             default:
                 break;
         }

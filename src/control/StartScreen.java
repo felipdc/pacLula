@@ -140,7 +140,7 @@ public class StartScreen extends javax.swing.JFrame {
          in.close();
          fileIn.close();
       } catch (IOException i) {
-         i.printStackTrace();
+         JOptionPane.showMessageDialog(rootPane, "Não há jogo salvo na memória.", "Erro", 0);
          return;
       } catch (ClassNotFoundException c) {
          c.printStackTrace();

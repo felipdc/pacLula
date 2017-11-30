@@ -79,6 +79,8 @@ public class BackgroundElement implements Serializable {
         
         addStageElements();
         
+        fruitSpawn();
+        
     }
     
     
@@ -123,7 +125,7 @@ public class BackgroundElement implements Serializable {
         }
     }
     
-    public void fruitSpawn(){
+    private void fruitSpawn(){
         
         //create random int object
         Random rn = new Random();
