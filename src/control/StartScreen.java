@@ -6,7 +6,9 @@
 package control;
 
 import java.awt.Image;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -125,12 +127,25 @@ public class StartScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MousePressed
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        BackgroundElement bg = null;
         try {
-            jButton1.setIcon(new javax.swing.ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + "carregarButton.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JOptionPane.showMessageDialog(rootPane, "Not implemented yet","Warning",2);
+         FileInputStream fileIn = new FileInputStream(new java.io.File(".").getCanonicalPath()+Consts.SER_PATH+"savedData.ser");
+         ObjectInputStream in = new ObjectInputStream(fileIn);
+         bg = (BackgroundElement) in.readObject();
+            GameScreen screen = new GameScreen(bg);
+            this.setVisible(false);
+            screen.setVisible(true);
+            screen.createBufferStrategy(2);
+            screen.go();
+         in.close();
+         fileIn.close();
+      } catch (IOException i) {
+         i.printStackTrace();
+         return;
+      } catch (ClassNotFoundException c) {
+         c.printStackTrace();
+         return;
+      }
         
     }//GEN-LAST:event_jButton1MouseReleased
 

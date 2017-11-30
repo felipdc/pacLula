@@ -1,5 +1,6 @@
 package elements;
 
+import control.BackgroundElement;
 import control.GameScreen;
 import control.Stage;
 import java.awt.Graphics;
@@ -34,15 +35,15 @@ public class Ghost extends Element{
        Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
     }
     
-    public int checkIfLoloIsDead(Lolo llolo, GameScreen gameScreen){
+    public int checkIfLoloIsDead(Lolo llolo, BackgroundElement bg){
         
         if(llolo.overlap(this)){
             if(!scared){
                 if(llolo.getLifes()==0){
-                    gameScreen.gameOver();
+                    bg.gameOver();
                 }
                 if(llolo.getLifes()!=0){
-                    gameScreen.loloCaught();
+                    bg.loloCaught();
                 }
                 return LOLO_DEAD;
             }else{

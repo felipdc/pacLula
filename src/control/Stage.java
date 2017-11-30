@@ -1,8 +1,9 @@
 package control;
 
+import java.io.Serializable;
 import utils.Consts;
 
-public class Stage{
+public class Stage implements Serializable{
     
     private int stageLevel;
     private int wallCount=0;

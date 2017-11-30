@@ -5,6 +5,7 @@
  */
 package elements;
 
+import control.BackgroundElement;
 import control.GameScreen;
 import java.util.Random;
 import utils.Consts;
@@ -21,13 +22,14 @@ public class Pinky extends Ghost{
     private static final int DOWN = 3;
     private static final int X = 5;
     private static final int Y = 6;
-    private GameScreen gameScreen;
+    private transient GameScreen gameScreen;
     private boolean pinkyJump = false;
+    private BackgroundElement bg;
     
     
-    public Pinky(String imageName, GameScreen gameScreen) {
+    public Pinky(String imageName, BackgroundElement bg) {
         super(imageName, Consts.ID_GHOST2);
-        this.gameScreen = gameScreen;
+        this.bg = bg;
     }
     
     public void seekLolo(Lolo llolo){
@@ -52,7 +54,7 @@ public class Pinky extends Ghost{
         
         
         //check if lolo is dead
-        if(checkIfLoloIsDead(llolo, gameScreen)==GHOST_DEAD){
+        if(checkIfLoloIsDead(llolo, bg)==GHOST_DEAD){
             this.setPosition(10, 8);
         }
         

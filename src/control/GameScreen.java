@@ -1,17 +1,6 @@
 package control;
 
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
-import elements.Blinky;
 import elements.Lolo;
-import elements.Element;
-import elements.Wall;
-import elements.Coin;
-import elements.Fruit;
-import elements.Glyde;
-import elements.Inky;
-import elements.Pinky;
-import elements.PowerPellet;
-import java.awt.Dimension;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -19,11 +8,13 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -41,11 +32,25 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
   
     private final GameController controller = new GameController();  
     private final BackgroundElement bgElement;
-    private boolean finishedScreen = false;
-    private int lifes = 3;
-    GameOverScreen overScreen;
+    private GameOverScreen overScreen;
  
 
+    public GameScreen(BackgroundElement bg) {
+        
+        Drawing.setGameScreen(this);
+        initComponents();
+        setFrameIconImage();
+        
+        this.addKeyListener(this);   /*teclado*/
+        
+        /*Cria a janela do tamanho do tabuleiro + insets (bordas) da janela*/
+        this.setSize(Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().left + getInsets().right,
+                     Consts.NUM_CELLS * Consts.CELL_SIZE + getInsets().top + getInsets().bottom);
+        
+        bgElement = bg;
+
+    }
+    
     public GameScreen() {
         
         Drawing.setGameScreen(this);
@@ -61,6 +66,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
         bgElement = new BackgroundElement(this);
 
     }
+    
     
     @Override
     public void paint(Graphics gOld) {
@@ -84,7 +90,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
         this.controller.drawAllElements(bgElement.elemArray, g2);
         this.controller.processAllElements(bgElement.elemArray);
-        this.setTitle("-> Cell: " + bgElement.lolo.getStringPosition() + "-> Score: R$"+ bgElement.lolo.getScore() + "-> Lifes: " + bgElement.lolo.getLifes() + bgElement.lolo.getPelletPowered());
+        this.setTitle("-> Cell: " + bgElement.lolo.getStringPosition() + "-> Score: R$"+ bgElement.lolo.getScore() + "-> Lifes: " + bgElement.lolo.getLifes());
         
         g.dispose();
         g2.dispose();
@@ -122,28 +128,7 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
 
     }
     
-    public void gameOver(){
-        if(!finishedScreen){
-            finishedScreen = true;
-            this.setVisible(false);
-            overScreen = new GameOverScreen();
-            overScreen.setVisible(true);
-            this.dispose();
-        }
-    }
-    
-    public void loloCaught(){
-        
-        bgElement.lolo.decreaseLifes();
-        
-        bgElement.lolo.setPosition(1, 1);
-        bgElement.blinky.setPosition(10, 7);
-        bgElement.pinky.setPosition(10,8);
-        bgElement.inky.setPosition(9,7);
-        bgElement.glyde.setPosition(9, 8);
-        
-        
-    }
+
     
     @Override
     public void keyPressed(KeyEvent e) {
@@ -162,12 +147,15 @@ public final class GameScreen extends javax.swing.JFrame implements KeyListener 
                 bgElement.lolo.setDesireDirection(Lolo.MOVE_RIGHT);
                 break;
             case KeyEvent.VK_SPACE:
-                bgElement.lolo.setDesireDirection(Lolo.STOP);
+                bgElement.saveGame();
                 break;
             default:
                 break;
         }
     }
+    
+  
+    
     
     /**
      * This method is called from within the constructor to initialize the form.

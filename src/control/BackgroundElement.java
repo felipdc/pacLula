@@ -16,6 +16,9 @@ import elements.Lolo;
 import elements.Pinky;
 import elements.PowerPellet;
 import elements.Wall;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
@@ -27,7 +30,7 @@ import utils.Consts;
  *
  * @author Felipe
  */
-public class BackgroundElement {
+public class BackgroundElement implements Serializable {
     
     //declare elements
     protected final Lolo lolo;
@@ -40,8 +43,9 @@ public class BackgroundElement {
     protected final Coin[] coins = new Coin[utils.Consts.NUM_CELLS*utils.Consts.NUM_CELLS+1];
     protected final Fruit[] fruits = new Fruit[2];
     protected final PowerPellet[] pellets = new PowerPellet[4];
+    private boolean finishedScreen = false;
     
-    private final GameScreen gameScreen;
+    private final transient GameScreen gameScreen;
     public ArrayList<Element> elemArray = new ArrayList<>();
     
     
@@ -54,22 +58,22 @@ public class BackgroundElement {
         this.addElement(lolo);
         
         //adding ghost blinky to stage
-        blinky = new Blinky("blinky.png", gameScreen);
+        blinky = new Blinky("blinky.png", this);
         blinky.setPosition(9,7);
         this.addElement(blinky);
         
         //adding ghost pinky to stage
-        pinky = new Pinky("pinky.png", gameScreen);
+        pinky = new Pinky("pinky.png", this);
         pinky.setPosition(10, 8);
         this.addElement(pinky);
         
         //adding ghost inky to stage      
-        inky = new Inky("inky.png", gameScreen);
+        inky = new Inky("inky.png", this);
         inky.setPosition(10,7);
         this.addElement(inky);
         
         //adding ghost glyde to stage
-        glyde = new Glyde("clyde.png", gameScreen);
+        glyde = new Glyde("clyde.png", this);
         glyde.setPosition(9,8);
         this.addElement(glyde);
         
@@ -193,6 +197,57 @@ public class BackgroundElement {
         Timer timeToSpawnBolsa = new Timer();
         timeToSpawnBolsa.schedule(spawnBolsa,Consts.FRUIT2_SPAWN_TIME,Consts.FRUIT2_SPAWN_TIME);
         
+    }
+    
+    
+    public void gameOver(){
+        if(!finishedScreen){
+            finishedScreen = true;
+            gameScreen.setVisible(false);          
+            GameOverScreen overScreen = new GameOverScreen();
+            overScreen.setVisible(true);
+            gameScreen.dispose();
+        }
+    }
+    
+    public void loloCaught(){
+        
+        lolo.decreaseLifes();
+        
+        lolo.setPosition(1, 1);
+        blinky.setPosition(10, 7);
+        pinky.setPosition(10,8);
+        inky.setPosition(9,7);
+        glyde.setPosition(9, 8);
+        
+        
+    }
+    
+    public void saveGame(){
+        
+        
+        try{
+		   
+		   /*
+		    * Responsável por carregar o arquivo address.ser
+		    * */
+                   
+                    System.out.println("Serialized data is saved in "+new java.io.File(".").getCanonicalPath()+Consts.SER_PATH+"savedData.ser");
+		    FileOutputStream fileOut =
+         new FileOutputStream(new java.io.File(".").getCanonicalPath()+Consts.SER_PATH+"savedData.ser");
+                    
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    
+                    out.writeObject(this);
+                    out.close();
+                    fileOut.close();
+                    
+                    System.out.println("Serialized data is saved in "+Consts.SER_PATH+"savedData.ser");
+ 
+	   }catch(Exception ex){
+		   ex.printStackTrace(); 
+	   } 
+    
     }
 
     

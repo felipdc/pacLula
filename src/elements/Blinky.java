@@ -1,5 +1,6 @@
 package elements;
 
+import control.BackgroundElement;
 import control.GameScreen;
 import control.Stage;
 import java.awt.Graphics;
@@ -23,11 +24,11 @@ public class Blinky extends Ghost{
     private boolean blinkyJump = false;
     
     private Stage stg = new Stage(1);
-    private GameScreen gameScreen;
+    private BackgroundElement bg;
     
-    public Blinky(String imageName, GameScreen gameScreen) {
+    public Blinky(String imageName, BackgroundElement bg) {
         super(imageName, Consts.ID_GHOST1);
-        this.gameScreen = gameScreen;
+        this.bg = bg;
     }
     
   
@@ -60,7 +61,7 @@ public class Blinky extends Ghost{
         }
              
         //Check if blinky got lolo
-        if(checkIfLoloIsDead(llolo, gameScreen)==GHOST_DEAD){
+        if(checkIfLoloIsDead(llolo, bg)==GHOST_DEAD){
             this.setPosition(10, 8);
         }
         

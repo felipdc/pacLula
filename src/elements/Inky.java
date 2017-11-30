@@ -1,6 +1,7 @@
 
 package elements;
 
+import control.BackgroundElement;
 import control.GameScreen;
 import control.Stage;
 import static elements.Element.MOVE_DOWN;
@@ -23,11 +24,12 @@ public class Inky extends Ghost{
     private Stage stg = new Stage(1);
     
     private boolean inkyJump = false;
-    private GameScreen gameScreen;
+    private transient GameScreen gameScreen;
+    private BackgroundElement bg;
     
-    public Inky(String imageName, GameScreen gameScreen) {
+    public Inky(String imageName, BackgroundElement bg) {
         super(imageName, Consts.ID_GHOST3);
-        this.gameScreen = gameScreen;
+        this.bg = bg;
     }
     
     public void seekLolo(Lolo llolo){
@@ -53,7 +55,7 @@ public class Inky extends Ghost{
         }
         
         //Check if blinky got lolo
-        if(checkIfLoloIsDead(llolo, gameScreen)==GHOST_DEAD){
+        if(checkIfLoloIsDead(llolo, bg)==GHOST_DEAD){
             this.setPosition(10, 8);
         }
         
