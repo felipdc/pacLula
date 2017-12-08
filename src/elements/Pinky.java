@@ -24,6 +24,8 @@ public class Pinky extends Ghost{
     private static final int Y = 6;
     private transient GameScreen gameScreen;
     private boolean pinkyJump = false;
+    private boolean scared = false;
+    private boolean alreadyCaught = false;
     private BackgroundElement bg;
     
     
@@ -34,14 +36,21 @@ public class Pinky extends Ghost{
     
     public void seekLolo(Lolo llolo){
         
-        if(llolo.getPelletPowered()){
+        if(llolo.getPelletPowered() && alreadyCaught==false){
             if(!"scaredGhost.png".equals(getGhostImage()))
                 paintGhost("scaredGhost.png");
             setJump(true);
-        }else{
+        }else if(llolo.getPelletPowered() && alreadyCaught==true){
+            scared=false;
             if(!"pinky.png".equals(getGhostImage()))
                 paintGhost("pinky.png");
             setJump(false);
+        }else{
+            scared=false;
+            if(!"pinky.png".equals(getGhostImage()))
+                paintGhost("pinky.png");
+            setJump(false);
+            alreadyCaught = false;
         }
         
         if(jumpMove()){
@@ -54,8 +63,11 @@ public class Pinky extends Ghost{
         
         
         //check if lolo is dead
-        if(checkIfLoloIsDead(llolo, bg)==GHOST_DEAD){
+        if(checkIfLoloIsDead(llolo, bg, scared)==GHOST_DEAD){
+            scared=false;
+            alreadyCaught=true;
             this.setPosition(10, 8);
+            
         }
         
         //Update large ghost position

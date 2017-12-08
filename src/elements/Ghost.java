@@ -19,8 +19,8 @@ public class Ghost extends Element{
     private Stage stg = new Stage(1);
     private int sensXPosition;
     private int sensYPosition;
+    private int ghostsDead;
     private String ghostImage;
-    private boolean scared = false;
     private boolean jump = false;
     
     public Ghost(String imageName, int ghostType) {
@@ -28,6 +28,7 @@ public class Ghost extends Element{
         this.isMortal = true;
         this.isTransposable = false;
         elementId = ghostType;
+        ghostsDead=0;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class Ghost extends Element{
        Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
     }
     
-    public int checkIfLoloIsDead(Lolo llolo, BackgroundElement bg){
+    public int checkIfLoloIsDead(Lolo llolo, BackgroundElement bg, boolean scared){
         
         if(llolo.overlap(this)){
             if(!scared){
@@ -47,7 +48,10 @@ public class Ghost extends Element{
                 }
                 return LOLO_DEAD;
             }else{
-                return GHOST_DEAD;
+                ghostsDead++;
+                System.out.println(ghostsDead);
+                llolo.increaseScore(ghostsDead*400);
+                return GHOST_DEAD;           
             }
         }
         return 0;
@@ -268,16 +272,8 @@ public class Ghost extends Element{
         return ghostImage;
     }
     
-    public boolean isScared(){
-        return scared;
-    }
-    
-    public void setScaredOn(){
-        scared=true;
-    }
-    
-    public void setScaredOff(){
-        scared=false;
+    public void resetGhostsDead(){
+        ghostsDead = 0;
     }
     
 }

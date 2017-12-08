@@ -22,6 +22,8 @@ public class Blinky extends Ghost{
     private static final int Y = 6;
     
     private boolean blinkyJump = false;
+    private boolean scared = false;
+    private boolean alreadyCaught = false;
     
     private Stage stg = new Stage(1);
     private BackgroundElement bg;
@@ -38,16 +40,23 @@ public class Blinky extends Ghost{
         
         //Check if lolo is powered
         
-        if(llolo.getPelletPowered()){
-            setScaredOn();
+        if(llolo.getPelletPowered() && alreadyCaught==false){
+            scared=true;
             if(!"scaredGhost.png".equals(getGhostImage()))
                 paintGhost("scaredGhost.png");
             setJump(true);
-        }else{
-            setScaredOff();
+        }else if(llolo.getPelletPowered() && alreadyCaught==true){
+            scared=false;
             if(!"blinky.png".equals(getGhostImage()))
                 paintGhost("blinky.png");
             setJump(false);
+        }else{
+            scared=false;
+            if(!"blinky.png".equals(getGhostImage()))
+                paintGhost("blinky.png");
+            setJump(false);
+            alreadyCaught = false;
+            resetGhostsDead();
         }
         
         //reduce movement by half when scared
@@ -61,8 +70,10 @@ public class Blinky extends Ghost{
         }
              
         //Check if blinky got lolo
-        if(checkIfLoloIsDead(llolo, bg)==GHOST_DEAD){
+        if(checkIfLoloIsDead(llolo, bg, scared)==GHOST_DEAD){
             this.setPosition(10, 8);
+            scared = false;
+            alreadyCaught = true;
         }
         
         //Update large ghost position
@@ -339,6 +350,18 @@ public class Blinky extends Ghost{
         }else{
             return Y;
         }
+    }
+    
+    public boolean isScared(){
+        return scared;
+    }
+    
+    public void setScaredOn(){
+        scared=true;
+    }
+    
+    public void setScaredOff(){
+        scared=false;
     }
 
 }

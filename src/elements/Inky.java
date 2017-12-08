@@ -24,6 +24,8 @@ public class Inky extends Ghost{
     private Stage stg = new Stage(1);
     
     private boolean inkyJump = false;
+    private boolean scared = false;
+    private boolean alreadyCaught = false;
     private transient GameScreen gameScreen;
     private BackgroundElement bg;
     
@@ -34,16 +36,22 @@ public class Inky extends Ghost{
     
     public void seekLolo(Lolo llolo){
         
-        if(llolo.getPelletPowered()){
-            setScaredOn();
+        if(llolo.getPelletPowered() && alreadyCaught==false){
+            scared = true;
             if(!"scaredGhost.png".equals(getGhostImage()))
                 paintGhost("scaredGhost.png");
             setJump(true);
-        }else{
-            setScaredOff();
+        }else if(llolo.getPelletPowered() && alreadyCaught==true){
+            scared=false;
             if(!"inky.png".equals(getGhostImage()))
                 paintGhost("inky.png");
             setJump(false);
+        }else{
+            scared=false;
+            if(!"inky.png".equals(getGhostImage()))
+                paintGhost("inky.png");
+            setJump(false);
+            alreadyCaught = false;
         }
         
         if(jumpMove()){
@@ -55,7 +63,9 @@ public class Inky extends Ghost{
         }
         
         //Check if blinky got lolo
-        if(checkIfLoloIsDead(llolo, bg)==GHOST_DEAD){
+        if(checkIfLoloIsDead(llolo, bg, scared)==GHOST_DEAD){
+            scared=false;
+            alreadyCaught=true;
             this.setPosition(10, 8);
         }
         
@@ -310,14 +320,14 @@ public class Inky extends Ghost{
     
     public int xPriority(double xDist){
         if(xDist<0){
-            if(!isScared()){
+            if(!scared){
                 return RIGHT;
             }else{
                 return LEFT;
             }
                 
         }else{
-            if(!isScared()){
+            if(!scared){
                 return LEFT;
             }else{
                 return RIGHT;
@@ -327,14 +337,14 @@ public class Inky extends Ghost{
     
     public int yPriority(double yDist){
         if(yDist>0){
-            if(!isScared()){
+            if(!scared){
                 return UP;
             }else{
                 return DOWN;
             }    
               
         }else{
-            if(!isScared()){
+            if(!scared){
                 return DOWN;
             }else{
                 return UP;

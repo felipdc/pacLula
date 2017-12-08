@@ -30,6 +30,8 @@ public class Glyde extends Ghost {
     private static final int Y = 6;
     
     private boolean clydeJump = false;
+    private boolean scared = false;
+    private boolean alreadyCaught = false;
     
     private transient GameScreen gameScreen;
     private BackgroundElement bg;
@@ -43,16 +45,22 @@ public class Glyde extends Ghost {
     
     public void seekLolo(Lolo llolo){
         
-        if(llolo.getPelletPowered()){
-            setScaredOn();
+        if(llolo.getPelletPowered() && alreadyCaught==false){
+            scared=true;
             if(!"scaredGhost.png".equals(getGhostImage()))
                 paintGhost("scaredGhost.png");
             setJump(true);
-        }else{
-            setScaredOff();
+        }else if(llolo.getPelletPowered() && alreadyCaught==true){
+            scared=false;
             if(!"clyde.png".equals(getGhostImage()))
                 paintGhost("clyde.png");
             setJump(false);
+        }else{
+            scared=false;
+            if(!"clyde.png".equals(getGhostImage()))
+                paintGhost("clyde.png");
+            setJump(false);
+            alreadyCaught = false;
         }
         
         if(jumpMove()){
@@ -64,7 +72,9 @@ public class Glyde extends Ghost {
         }
         
         //Check if blinky got lolo
-        if(checkIfLoloIsDead(llolo, bg)==GHOST_DEAD){
+        if(checkIfLoloIsDead(llolo, bg, scared)==GHOST_DEAD){
+            scared=false;
+            alreadyCaught=true;
             this.setPosition(10, 8);
         }
         
@@ -319,14 +329,14 @@ public class Glyde extends Ghost {
     
     public int xPriority(double xDist){
         if(xDist<0){
-            if(!isScared()){
+            if(!scared){
                 return RIGHT;
             }else{
                 return LEFT;
             }
                 
         }else{
-            if(!isScared()){
+            if(!scared){
                 return LEFT;
             }else{
                 return RIGHT;
@@ -336,14 +346,14 @@ public class Glyde extends Ghost {
     
     public int yPriority(double yDist){
         if(yDist>0){
-            if(!isScared()){
+            if(!scared){
                 return UP;
             }else{
                 return DOWN;
             }    
               
         }else{
-            if(!isScared()){
+            if(!scared){
                 return DOWN;
             }else{
                 return UP;

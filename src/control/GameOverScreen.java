@@ -50,7 +50,7 @@ public class GameOverScreen extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 90, -1));
 
         jButton2.setText("Sair");
         jButton2.setMaximumSize(new java.awt.Dimension(69, 30));
@@ -60,9 +60,9 @@ public class GameOverScreen extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 70, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 90, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/control/gameover.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getBgImage()));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 360));
 
         pack();
@@ -127,8 +127,15 @@ public class GameOverScreen extends javax.swing.JFrame {
         }catch(IOException ex){
             Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
+    }
+    
+    private String getBgImage(){
+        try {
+            return new java.io.File(".").getCanonicalPath() + Consts.PATH + "gameover.jpg";
+        } catch (IOException ex) {
+            Logger.getLogger(StartScreen.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
